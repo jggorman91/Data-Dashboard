@@ -113,7 +113,6 @@
         }
 
         .dashboard-section {
-            /* display: none; /* Controlled by aria-hidden and active-section for animation */
             background-color: var(--card-bg);
             padding: calc(var(--spacing-unit) * 3);
             border-radius: var(--border-radius-md);
@@ -124,11 +123,9 @@
             display: none;
         }
         .dashboard-section[aria-hidden="false"] {
-            display: block; /* Or your preferred display type */
-            animation: fadeIn 0.4s ease-in-out; /* Apply animation only when becoming visible */
+            display: block; 
+            animation: fadeIn 0.4s ease-in-out; 
         }
-        /* .dashboard-section.active-section is used for the animation trigger if needed,
-           but aria-hidden is the primary visibility control for A11y and CSS */
 
 
         @keyframes fadeIn {
@@ -146,7 +143,7 @@
         
         .dashboard-section h3 {
             font-size: 1.3rem;
-            color: var(--header-bg); /* Darker like header */
+            color: var(--header-bg); 
             margin-top: calc(var(--spacing-unit) * 2.4);
             margin-bottom: calc(var(--spacing-unit) * 1.2); /* 0.6rem */
         }
@@ -169,7 +166,7 @@
             margin-bottom: calc(var(--spacing-unit) * 2.4);
             padding: calc(var(--spacing-unit) * 2); /* 1rem */
             border-left: 3px solid var(--primary-color);
-            background-color: #fdfdff; /* Very light blue tint */
+            background-color: #fdfdff; 
             border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
         }
         .method-overview h4, .best-practice-item h4 {
@@ -189,7 +186,7 @@
             font-weight: 500;
         }
         .tutorial-step:hover {
-            background-color: #ced4da; /* Darker gray on hover */
+            background-color: #ced4da; 
         }
         .tutorial-step:focus {
             outline: 2px solid var(--interactive-highlight);
@@ -203,7 +200,7 @@
             border-left: 2px solid var(--interactive-highlight);
             margin-top: var(--spacing-unit);
             font-size: 0.9rem;
-            background-color: #fdfdff; /* Slightly off-white */
+            background-color: #fdfdff; 
         }
         .tutorial-content.visible {
             display: block;
@@ -308,14 +305,14 @@
          #recommendationResultContainer p, #recommendationResultContainer ul {
             font-family: var(--font-sans-serif);
             font-size: 0.95rem;
-        }
-        #recommendationResultContainer ul {
-            list-style-position: inside; /* Ensures bullets are aligned well */
-            padding-left: 0; /* Reset browser default */
-        }
-        #recommendationResultContainer li {
+         }
+         #recommendationResultContainer ul {
+            list-style-position: inside; 
+            padding-left: 0; 
+         }
+         #recommendationResultContainer li {
             margin-bottom: calc(var(--spacing-unit) * 0.5);
-        }
+         }
 
 
         /* Footer */
@@ -327,7 +324,7 @@
             font-size: 0.85rem;
             margin-top: auto; /* Pushes footer to bottom */
         }
-        footer p { margin-bottom: var(--spacing-unit); } /* Add some space between paragraphs */
+        footer p { margin-bottom: var(--spacing-unit); } 
         footer p:last-child { margin-bottom: 0; }
 
 
@@ -420,13 +417,13 @@
             <h2 tabindex="-1">Defining Target Behaviors Operationally</h2>
             <p>The foundation of effective behavior data collection is a clear, objective, and measurable definition of the target behavior[cite: 70]. This is known as an operational definition.</p>
             
-            <div class="tutorial-step" data-target="opdef-step1" role="button" aria-expanded="false" aria-controls="opdef-step1-content">Why Operational Definitions Matter</div>
+            <div class="tutorial-step" data-target="opdef-step1" role="button" tabindex="0" aria-expanded="false" aria-controls="opdef-step1-content">Why Operational Definitions Matter</div>
             <div id="opdef-step1-content" class="tutorial-content">
                 <p>An operational definition ensures everyone observing the student is looking for and recording the same thing[cite: 70, 124]. It avoids vague terms (e.g., "disruptive," "aggressive") and describes the behavior in a way that is directly observable and measurable[cite: 70, 71]. This increases the reliability and consistency of your data[cite: 71, 126].</p>
                 <p><em>Example:</em> Instead of "hyperactive," define as "student's hips move from being in contact with their assigned seat/area without permission during whole group instruction or independent work periods."</p>
             </div>
 
-            <div class="tutorial-step" data-target="opdef-step2" role="button" aria-expanded="false" aria-controls="opdef-step2-content">Components of a Good Operational Definition</div>
+            <div class="tutorial-step" data-target="opdef-step2" role="button" tabindex="0" aria-expanded="false" aria-controls="opdef-step2-content">Components of a Good Operational Definition</div>
             <div id="opdef-step2-content" class="tutorial-content">
                 <ul>
                     <li><strong>Observable:</strong> The behavior can be seen or heard[cite: 70, 124].</li>
@@ -439,7 +436,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="tutorial-step" data-target="opdef-step3" role="button" aria-expanded="false" aria-controls="opdef-step3-content">Practice: Defining a Behavior</div>
+            <div class="tutorial-step" data-target="opdef-step3" role="button" tabindex="0" aria-expanded="false" aria-controls="opdef-step3-content">Practice: Defining a Behavior</div>
             <div id="opdef-step3-content" class="tutorial-content">
                 <p>Let's say you want to track "non-compliance." How would you define it operationally for a 2nd-grade student?</p>
                 <p><em>Consider:</em> What does it look like? Sound like? When does it typically occur? What actions would *not* be counted?</p>
@@ -451,35 +448,35 @@
             <h2 tabindex="-1">Key Behavior Data Collection Methods</h2>
             <p>Several methods can be used to collect behavior data, each with its strengths[cite: 82, 83]. Often, a combination of methods provides the most comprehensive picture[cite: 72, 201].</p>
 
-            <div class="tutorial-step" data-target="method-frequency" role="button" aria-expanded="false" aria-controls="method-frequency-content">Frequency (Event) Recording</div>
+            <div class="tutorial-step" data-target="method-frequency" role="button" tabindex="0" aria-expanded="false" aria-controls="method-frequency-content">Frequency (Event) Recording</div>
             <div id="method-frequency-content" class="tutorial-content">
                 <h4>What it is:</h4> <p>Counting how many times a specific, discrete behavior occurs within a defined observation period (e.g., number of call-outs during a 30-minute lesson)[cite: 84, 85].</p>
                 <h4>Best for:</h4> <p>Behaviors that have a clear beginning and end and don't occur so frequently that counting is impossible (e.g., hitting, raising hand, task completion)[cite: 85, 89].</p>
                 <h4>Tips:</h4> <ul><li>Define the behavior clearly[cite: 124].</li><li>Use simple tally marks, counters, or apps[cite: 87, 12].</li><li>Note the length of the observation period to calculate rate (e.g., occurrences per minute/hour)[cite: 86].</li></ul>
             </div>
 
-            <div class="tutorial-step" data-target="method-duration" role="button" aria-expanded="false" aria-controls="method-duration-content">Duration Recording</div>
+            <div class="tutorial-step" data-target="method-duration" role="button" tabindex="0" aria-expanded="false" aria-controls="method-duration-content">Duration Recording</div>
             <div id="method-duration-content" class="tutorial-content">
                 <h4>What it is:</h4> <p>Measuring how long a behavior lasts from its onset to its end (e.g., length of a tantrum, time spent off-task)[cite: 14, 90].</p>
                 <h4>Best for:</h4> <p>Behaviors where the length of time is the primary concern, or behaviors that are continuous or occur at very high rates[cite: 90, 92].</p>
                 <h4>Tips:</h4> <ul><li>Requires a timing device (stopwatch, timer app)[cite: 15, 91].</li><li>Can calculate total duration (e.g., total minutes off-task in a period) or average duration per occurrence[cite: 16, 91].</li><li>Often useful to combine with frequency (e.g., 3 tantrums, average duration 5 minutes)[cite: 94].</li></ul>
             </div>
             
-            <div class="tutorial-step" data-target="method-latency" role="button" aria-expanded="false" aria-controls="method-latency-content">Latency Recording</div>
+            <div class="tutorial-step" data-target="method-latency" role="button" tabindex="0" aria-expanded="false" aria-controls="method-latency-content">Latency Recording</div>
             <div id="method-latency-content" class="tutorial-content">
                 <h4>What it is:</h4> <p>Measuring the time that elapses between a specific cue or instruction (antecedent) and the beginning of the target behavior (e.g., time taken to start a task after being asked)[cite: 14, 18, 101].</p>
                 <h4>Best for:</h4> <p>Assessing compliance, task initiation, or how quickly a behavior follows a trigger[cite: 103, 105].</p>
                 <h4>Tips:</h4> <ul><li>Start timing when the cue is given and stop when the behavior begins[cite: 106].</li><li>Clearly define what constitutes the "start" of the behavior (e.g. pencil touches paper)[cite: 108].</li></ul>
             </div>
 
-            <div class="tutorial-step" data-target="method-interval" role="button" aria-expanded="false" aria-controls="method-interval-content">Interval Recording & Time Sampling</div>
+            <div class="tutorial-step" data-target="method-interval" role="button" tabindex="0" aria-expanded="false" aria-controls="method-interval-content">Interval Recording & Time Sampling</div>
             <div id="method-interval-content" class="tutorial-content">
                 <h4>What it is:</h4> <p>Dividing an observation period into short, equal intervals and recording whether the behavior occurred during (partial-interval), throughout (whole-interval), or at the exact moment the interval ends (momentary time sampling)[cite: 19, 95]. There are two main types: whole-interval (behavior occurred continuously for the entire interval) and partial-interval (behavior occurred at least once)[cite: 21, 96].</p>
                 <h4>Best for:</h4> <p>Behaviors that occur at high frequencies or are continuous, making it hard to count every instance (e.g., on-task behavior, fidgeting, social interaction)[cite: 98, 100]. Provides an estimate of behavior.</p>
                 <h4>Tips:</h4> <ul><li>Choose interval length appropriate for the behavior (e.g., 10-30 seconds)[cite: 95].</li><li>Partial-interval tends to overestimate behavior occurrence, while whole-interval can underestimate[cite: 21, 96].</li><li>Momentary time sampling is convenient but can miss behaviors that happen outside the exact moment[cite: 24, 99].</li><li>Often reported as a percentage of intervals in which behavior occurred[cite: 22, 97].</li></ul>
             </div>
 
-            <div class="tutorial-step" data-target="method-abc" role="button" aria-expanded="false" aria-controls="method-abc-content">ABC Recording (Antecedent-Behavior-Consequence)</div>
+            <div class="tutorial-step" data-target="method-abc" role="button" tabindex="0" aria-expanded="false" aria-controls="method-abc-content">ABC Recording (Antecedent-Behavior-Consequence)</div>
             <div id="method-abc-content" class="tutorial-content">
                 <h4>What it is:</h4> <p>A descriptive, narrative method where the observer records what happened immediately *before* the behavior (Antecedent), the behavior itself (objectively described), and what happened immediately *after* (Consequence)[cite: 27, 109].</p>
                 <h4>Best for:</h4> <p>Understanding the context and potential function (purpose) of challenging behaviors, often used as part of a Functional Behavior Assessment (FBA)[cite: 109, 110].</p>
@@ -509,7 +506,7 @@
                 <fieldset id="generatorOptionsContainerWrapper">
                      <legend>Template Details</legend>
                      <div id="generatorOptionsContainer">
-                        </div>
+                         </div>
                 </fieldset>
                 <button type="button" id="generateTemplateButton" class="button">Generate Template</button>
             </form>
@@ -670,11 +667,11 @@
             if (mainHeading) {
                 mainHeading.focus();
             } else {
-                 activeSection.setAttribute('tabindex', '-1');
+                 activeSection.setAttribute('tabindex', '-1'); // Ensure section can be focused if no h2
                  activeSection.focus();
             }
         }
-        window.scrollTo(0,0);
+        window.scrollTo(0,0); // Scroll to top when section changes
     }
 
     function convertToSeconds(timeStr) {
@@ -710,6 +707,7 @@
             initialSectionId = 'homepage'; // Fallback if hash is invalid
         }
 
+        // Set initial visibility for all sections and active nav link
         document.querySelectorAll('.dashboard-section').forEach(section => {
             if (section.id === initialSectionId) {
                 section.setAttribute('aria-hidden', 'false');
@@ -724,6 +722,7 @@
                 link.classList.remove('active-nav');
             }
         });
+        // Focus the heading of the initial section
         const activeInitialSection = document.getElementById(initialSectionId);
         if (activeInitialSection) {
             const mainHeading = activeInitialSection.querySelector('h2');
@@ -745,6 +744,7 @@
                     step.setAttribute('aria-expanded', String(isVisible));
                 }
             });
+            // Allow keyboard activation for tutorial steps
             step.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault(); 
@@ -773,19 +773,19 @@
         
         if (templateTypeSelect) {
             templateTypeSelect.addEventListener('change', updateGeneratorOptions);
-            updateGeneratorOptions(); 
+            updateGeneratorOptions(); // Initial call to populate based on default selection
         }
 
         if (generateTemplateButton) {
             generateTemplateButton.addEventListener('click', () => {
                 const form = document.getElementById('templateGeneratorForm');
                 if (!form.checkValidity()) {
-                    form.reportValidity();
+                    form.reportValidity(); // Show HTML5 validation messages
                     return;
                 }
 
                 const type = templateTypeSelect.value;
-                let output = `Data Collection Template: ${type.replace(/([A-Z])/g, ' $1').trim()}\n\n`;
+                let output = `Data Collection Template: ${type.replace(/([A-Z])/g, ' $1').trim()}\n\n`; // Add space before capital letters for display
                 output += `Student: _________________________ Date: ______________ Observer: ______________\n`;
                 output += `Setting: _________________________ Time Start: _________ Time End: __________\n\n`;
                 
@@ -799,16 +799,24 @@
                     operationalDefText = document.getElementById(opDefInputId).value.trim();
                 }
 
-                const mainBehaviorInput = document.getElementById('freqBehaviors') || document.getElementById('durBehavior') || document.getElementById('intervalBehavior') || document.getElementById('latBehavior') || document.getElementById('abcTargetBehavior');
+                let mainBehaviorInputId = null;
+                if (type === 'frequencyLog') mainBehaviorInputId = 'freqBehaviors';
+                else if (type === 'durationLog') mainBehaviorInputId = 'durBehavior';
+                else if (type === 'intervalSheet') mainBehaviorInputId = 'intervalBehavior';
+                else if (type === 'latencyLog') mainBehaviorInputId = 'latBehavior';
+                else if (type === 'abcChart') mainBehaviorInputId = 'abcTargetBehavior';
+
+                const mainBehaviorInput = mainBehaviorInputId ? document.getElementById(mainBehaviorInputId) : null;
                 const mainBehaviorName = mainBehaviorInput ? mainBehaviorInput.value.trim() : "Target Behavior";
 
-                if (type !== 'abcChart' || (type === 'abcChart' && mainBehaviorName && mainBehaviorName !== "Target Behavior")) {
+
+                if (type !== 'abcChart' || (type === 'abcChart' && mainBehaviorName && mainBehaviorName !== "Target Behavior" && mainBehaviorName !== "")) {
                      output += `Target Behavior(s): ${mainBehaviorName || "Not Specified"}\n`;
                 }
                 
                 if (operationalDefText) {
                     output += `Operational Definition:\n${operationalDefText}\n________________________________________________________________________________\n\n`;
-                } else if (type !== 'abcChart') {
+                } else if (type !== 'abcChart') { // ABC Op Def is less common directly on the sheet, usually separate
                     output += `Operational Definition: [Remember to define the behavior(s) in clear, observable, and measurable terms. E.g., For 'Hitting': Any instance of the student's hand/fist making forceful contact with another person's body.]\n________________________________________________________________________________\n\n`;
                 }
 
@@ -817,7 +825,7 @@
                         const behaviors = (document.getElementById('freqBehaviors')?.value || 'Behavior 1').split(',').map(b => b.trim());
                         const obsPeriod = document.getElementById('freqObservationPeriod')?.value || 'N/A';
                         output += `Observation Period: ${obsPeriod}\n\n`;
-                        output += `| Behavior Tracked          | Tallies                               | Total |\n`;
+                        output += `| Behavior Tracked        | Tallies                               | Total |\n`;
                         output += `|---------------------------|---------------------------------------|-------|\n`;
                         behaviors.forEach(b => {
                             output += `| ${b.padEnd(25)} |                                       |       |\n`;
@@ -832,7 +840,7 @@
                         break;
                     case 'abcChart':
                         output += `Instructions: For each observed instance of the target behavior(s), describe what happened just before (Antecedent), the Behavior itself, and what happened right after (Consequence)[cite: 27, 109].\n\n`
-                        output += `| Date/Time | Setting/Activity | Antecedent (What happened BEFORE?)                     | Behavior (What did student DO - be specific) | Consequence (What happened AFTER? How did others react?) |\n`;
+                        output += `| Date/Time | Setting/Activity | Antecedent (What happened BEFORE?)                      | Behavior (What did student DO - be specific) | Consequence (What happened AFTER? How did others react?) |\n`;
                         output += `|-----------|------------------|--------------------------------------------------------|----------------------------------------------|----------------------------------------------------------|\n`;
                         for(let i=0; i<5; i++) output += `|           |                  |                                                        |                                              |                                                          |\n`;
                         output += `\nPossible Function/Purpose Hypothesis (Why do you think the behavior is occurring? e.g., to get attention, escape task, get item):\n`;
@@ -845,16 +853,16 @@
                         output += `Key: [+] = Behavior Occurred, [-] = Behavior Did Not Occur (according to ${intervalTypeVal} definition)\n\n`;
                         output += `| Interval # | Time  | (+/-) | Notes (Optional: Antecedents, Consequences for key intervals) |\n`;
                         output += `|------------|-------|-------|---------------------------------------------------------------|\n`;
-                        let numIntervals = 10; 
+                        let numIntervals = 10; // Default if calculation fails
                         try {
                             const totalSeconds = convertToSeconds(totalTime);
                             const intervalSecondsValNum = convertToSeconds(intervalLength);
                             if (totalSeconds > 0 && intervalSecondsValNum > 0) {
                                 numIntervals = Math.floor(totalSeconds / intervalSecondsValNum);
                             }
-                        } catch (e) { /* Use default */ }
+                        } catch (e) { /* Use default numIntervals */ }
 
-                        for (let k = 1; k <= Math.max(1, numIntervals) ; k++) {
+                        for (let k = 1; k <= Math.max(1, numIntervals) ; k++) { // Ensure at least 1 interval row
                             output += `| ${String(k).padEnd(10)} |       |       |                                                               |\n`;
                         }
                         output += `\nTotal Intervals with Behavior: ______\nPercentage of Intervals with Behavior: ______ % (Total with Behavior / Total Intervals * 100)\n`;
@@ -905,7 +913,7 @@
                 const qConfig = behaviorRecQuestionsConfig[index];
                 
                 let qGroup = document.getElementById(`q-group-${qConfig.id}`);
-                if (!qGroup) { 
+                if (!qGroup) { // Only create if it doesn't exist
                     qGroup = document.createElement('fieldset');
                     qGroup.id = `q-group-${qConfig.id}`;
                     qGroup.className = 'mb-2';
@@ -930,6 +938,7 @@
                     selectEl.addEventListener('change', (event) => {
                         userRecAnswers[qConfig.id] = event.target.value;
                         
+                        // Check if all questions up to this one (inclusive) are answered
                         let allPreviousAnswered = true;
                         for(let i = 0; i <= index; i++) {
                             if(!userRecAnswers[behaviorRecQuestionsConfig[i].id] || userRecAnswers[behaviorRecQuestionsConfig[i].id] === "") {
@@ -939,9 +948,10 @@
                         }
 
                         if (allPreviousAnswered && index + 1 < behaviorRecQuestionsConfig.length) {
-                            displayRecQuestion(index + 1); 
+                            displayRecQuestion(index + 1); // Show next question if current one answered
                         }
                         
+                        // Check if ALL questions are answered to show button
                         const allAnswered = behaviorRecQuestionsConfig.every(q => userRecAnswers[q.id] && userRecAnswers[q.id] !== "");
                         if (allAnswered && getRecButton) {
                             getRecButton.style.display = 'inline-block';
@@ -950,10 +960,11 @@
                         }
                     });
                 }
-                const allAnsweredCheck = behaviorRecQuestionsConfig.every(q => userRecAnswers[q.id] && userRecAnswers[q.id] !== "");
-                if (!allAnsweredCheck && getRecButton) {
-                    getRecButton.style.display = 'none';
-                }
+                // If not all questions are answered, ensure button is hidden
+                 const allAnsweredCheck = behaviorRecQuestionsConfig.every(q => userRecAnswers[q.id] && userRecAnswers[q.id] !== "");
+                 if (!allAnsweredCheck && getRecButton) {
+                     getRecButton.style.display = 'none';
+                 }
             }
         }
         
@@ -963,6 +974,7 @@
                 let reasoningPoints = [];
                 const { behaviorNature, infoNeeded, observerAvailability } = userRecAnswers;
 
+                // Ensure all answers are provided
                 if (!behaviorNature || !infoNeeded || !observerAvailability || behaviorNature === "" || infoNeeded === "" || observerAvailability === "") {
                     alert("Please answer all questions to get a recommendation.");
                     return;
@@ -981,14 +993,14 @@
                         recommendations.add("Frequency (Event) Recording");
                         reasoningPoints.push("For behaviors with a clear start and end, Frequency Recording counts how many times it occurs, which is ideal for tracking increases or decreases[cite: 85, 89].");
                     }
-                    if (infoNeeded === 'howLong' && !recommendations.has("Duration Recording")) { 
+                    if (infoNeeded === 'howLong' && !recommendations.has("Duration Recording")) { // Add only if not already there
                         recommendations.add("Duration Recording");
                         reasoningPoints.push("If the length of each discrete instance is important (e.g., short vs. long episodes of a specific action), use Duration Recording[cite: 90].");
                     }
                 }
                 if (behaviorNature === 'continuous' || (behaviorNature === 'discrete' && infoNeeded === 'proportionOfTime')) { 
                     if (infoNeeded === 'howLong' || infoNeeded === 'proportionOfTime') {
-                        if (!recommendations.has("Duration Recording")) { 
+                        if (!recommendations.has("Duration Recording")) { // Add only if not already there
                              recommendations.add("Duration Recording");
                              reasoningPoints.push("For continuous behaviors, or when the total time spent in a behavior is key, Duration Recording is suitable[cite: 90, 92].");
                         }
@@ -999,36 +1011,38 @@
                         reasoningPoints.push("For ongoing behaviors, or if continuous observation is difficult, Interval Recording or Momentary Time Sampling can provide an estimate of how often or what proportion of time the behavior occurs[cite: 98, 100]. MTS is often easier for teachers managing a class[cite: 99, 25].");
                     }
                 }
-                if (recommendations.size === 0) { 
+                if (recommendations.size === 0) { // Fallback if no specific rules matched well
                      recommendations.add("Direct Observation with Anecdotal Notes");
                      reasoningPoints.push("If the behavior is complex or the best measurement isn't immediately clear, start with detailed narrative (anecdotal) notes during direct observation. This can help clarify the behavior's characteristics and guide the selection of a more specific data collection method later.");
                 }
-                if (recommendations.has("Frequency (Event) Recording") && recommendations.has("Duration Recording") && recommendations.size <= 3) { 
+                if (recommendations.has("Frequency (Event) Recording") && recommendations.has("Duration Recording") && recommendations.size <= 3) { // Check if both are present and not too many other methods
                     reasoningPoints.push("Often, combining Frequency and Duration Recording gives a more complete picture (e.g., how many times a behavior occurred and how long each instance lasted)[cite: 94, 201].");
                 }
                 if (recommendations.has("ABC Recording") && recommendations.size > 1 && recommendations.size <=3 ) {
                     reasoningPoints.push("ABC data can be supplemented with quantitative measures (like Frequency or Duration) to provide both contextual understanding and measurable change over time[cite: 121].");
                 }
 
+
                 recMethodP.textContent = recommendations.size > 0 ? Array.from(recommendations).join('; or ') : "Could not determine a primary recommendation. Consider direct observation and anecdotal notes first.";
                 
-                recReasoningUl.innerHTML = ''; 
+                recReasoningUl.innerHTML = ''; // Clear previous reasoning
                 reasoningPoints.forEach(point => {
                     const li = document.createElement('li');
-                    // Corrected regex for citation replacement
-                    li.innerHTML = point.replace(/\/g, '<span style="font-style:italic; color: #555;"></span>');
+                    // Make citations like italic
+                    li.innerHTML = point.replace(/(\+\])/g, '<em>$1</em>');
                     recReasoningUl.appendChild(li);
                 });
                 recResultDiv.style.display = 'block';
             });
         }
 
+        // Initialize the first question for the recommendation tool
         if (recQuestionsContainer) displayRecQuestion(currentRecQuestionIndex);
 
+        // --- Footer Year ---
         const currentYearSpan = document.getElementById('currentYear');
         if (currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
     });
-</script>
 </script>
 </body>
 </html>
