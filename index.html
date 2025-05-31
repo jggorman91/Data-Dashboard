@@ -576,7 +576,7 @@
     </footer>
 
 <script>
-    // --- Configuration for Generator Options ---
+// --- Configuration for Generator Options ---
     const generatorFieldConfigurations = {
         frequencyLog: () => `
             <label for="freqBehaviors">Behaviors to Track (comma-separated):</label>
@@ -661,19 +661,16 @@
     function showSection(sectionId) {
         document.querySelectorAll('.dashboard-section').forEach(section => {
             const isActive = section.id === sectionId;
-            // section.classList.toggle('active-section', isActive); // 'active-section' can be used for animation trigger if needed
             section.setAttribute('aria-hidden', String(!isActive));
         });
 
         const activeSection = document.getElementById(sectionId);
         if (activeSection) {
-            // No need to re-add active-section if aria-hidden CSS handles display
-            // activeSection.classList.add('active-section'); 
             const mainHeading = activeSection.querySelector('h2');
             if (mainHeading) {
                 mainHeading.focus();
             } else {
-                 activeSection.setAttribute('tabindex', '-1'); // Should already be there from HTML
+                 activeSection.setAttribute('tabindex', '-1');
                  activeSection.focus();
             }
         }
@@ -716,10 +713,8 @@
         document.querySelectorAll('.dashboard-section').forEach(section => {
             if (section.id === initialSectionId) {
                 section.setAttribute('aria-hidden', 'false');
-                // section.classList.add('active-section'); // For animation, if CSS is set up for it
             } else {
                 section.setAttribute('aria-hidden', 'true');
-                // section.classList.remove('active-section');
             }
         });
         navLinks.forEach(link => {
@@ -735,11 +730,10 @@
             if (mainHeading) {
                 mainHeading.focus();
             } else {
-                 activeInitialSection.setAttribute('tabindex', '-1'); // Should already be there
+                 activeInitialSection.setAttribute('tabindex', '-1'); 
                  activeInitialSection.focus();
             }
         }
-
 
         // --- Interactive Tutorial Logic ---
         document.querySelectorAll('.tutorial-step').forEach(step => {
@@ -751,7 +745,6 @@
                     step.setAttribute('aria-expanded', String(isVisible));
                 }
             });
-            // tabindex="0" is already set in HTML
             step.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault(); 
@@ -780,7 +773,7 @@
         
         if (templateTypeSelect) {
             templateTypeSelect.addEventListener('change', updateGeneratorOptions);
-            updateGeneratorOptions(); // Initial call
+            updateGeneratorOptions(); 
         }
 
         if (generateTemplateButton) {
@@ -818,7 +811,6 @@
                 } else if (type !== 'abcChart') {
                     output += `Operational Definition: [Remember to define the behavior(s) in clear, observable, and measurable terms. E.g., For 'Hitting': Any instance of the student's hand/fist making forceful contact with another person's body.]\n________________________________________________________________________________\n\n`;
                 }
-
 
                 switch (type) {
                     case 'frequencyLog':
@@ -913,7 +905,7 @@
                 const qConfig = behaviorRecQuestionsConfig[index];
                 
                 let qGroup = document.getElementById(`q-group-${qConfig.id}`);
-                if (!qGroup) { // Only create if it doesn't exist
+                if (!qGroup) { 
                     qGroup = document.createElement('fieldset');
                     qGroup.id = `q-group-${qConfig.id}`;
                     qGroup.className = 'mb-2';
@@ -938,7 +930,6 @@
                     selectEl.addEventListener('change', (event) => {
                         userRecAnswers[qConfig.id] = event.target.value;
                         
-                        // Determine if we should show the next question or the button
                         let allPreviousAnswered = true;
                         for(let i = 0; i <= index; i++) {
                             if(!userRecAnswers[behaviorRecQuestionsConfig[i].id] || userRecAnswers[behaviorRecQuestionsConfig[i].id] === "") {
@@ -948,10 +939,9 @@
                         }
 
                         if (allPreviousAnswered && index + 1 < behaviorRecQuestionsConfig.length) {
-                            displayRecQuestion(index + 1); // Display next question
+                            displayRecQuestion(index + 1); 
                         }
                         
-                        // Check if all questions are answered to show button
                         const allAnswered = behaviorRecQuestionsConfig.every(q => userRecAnswers[q.id] && userRecAnswers[q.id] !== "");
                         if (allAnswered && getRecButton) {
                             getRecButton.style.display = 'inline-block';
@@ -960,12 +950,10 @@
                         }
                     });
                 }
-                // Hide button if not all questions are answered yet
-                const allAnswered = behaviorRecQuestionsConfig.every(q => userRecAnswers[q.id] && userRecAnswers[q.id] !== "");
-                if (!allAnswered && getRecButton) {
+                const allAnsweredCheck = behaviorRecQuestionsConfig.every(q => userRecAnswers[q.id] && userRecAnswers[q.id] !== "");
+                if (!allAnsweredCheck && getRecButton) {
                     getRecButton.style.display = 'none';
                 }
-
             }
         }
         
@@ -973,7 +961,6 @@
             getRecButton.addEventListener('click', () => {
                 let recommendations = new Set();
                 let reasoningPoints = [];
-
                 const { behaviorNature, infoNeeded, observerAvailability } = userRecAnswers;
 
                 if (!behaviorNature || !infoNeeded || !observerAvailability || behaviorNature === "" || infoNeeded === "" || observerAvailability === "") {
@@ -985,12 +972,10 @@
                     recommendations.add("ABC Recording");
                     reasoningPoints.push("To understand the context, potential triggers (Antecedents), and outcomes (Consequences) which helps hypothesize the function of the behavior, ABC Recording is the primary method[cite: 109, 110].");
                 }
-
                 if (behaviorNature === 'responseLag') {
                     recommendations.add("Latency Recording");
                     reasoningPoints.push("When the main concern is the time delay between a prompt/instruction and the start of the behavior, Latency Recording directly measures this[cite: 101, 105].");
                 }
-
                 if (behaviorNature === 'discrete') {
                     if (infoNeeded === 'howOften') {
                         recommendations.add("Frequency (Event) Recording");
@@ -1001,7 +986,6 @@
                         reasoningPoints.push("If the length of each discrete instance is important (e.g., short vs. long episodes of a specific action), use Duration Recording[cite: 90].");
                     }
                 }
-                
                 if (behaviorNature === 'continuous' || (behaviorNature === 'discrete' && infoNeeded === 'proportionOfTime')) { 
                     if (infoNeeded === 'howLong' || infoNeeded === 'proportionOfTime') {
                         if (!recommendations.has("Duration Recording")) { 
@@ -1015,38 +999,36 @@
                         reasoningPoints.push("For ongoing behaviors, or if continuous observation is difficult, Interval Recording or Momentary Time Sampling can provide an estimate of how often or what proportion of time the behavior occurs[cite: 98, 100]. MTS is often easier for teachers managing a class[cite: 99, 25].");
                     }
                 }
-                
                 if (recommendations.size === 0) { 
                      recommendations.add("Direct Observation with Anecdotal Notes");
                      reasoningPoints.push("If the behavior is complex or the best measurement isn't immediately clear, start with detailed narrative (anecdotal) notes during direct observation. This can help clarify the behavior's characteristics and guide the selection of a more specific data collection method later.");
                 }
-                
-                if (recommendations.has("Frequency (Event) Recording") && recommendations.has("Duration Recording") && recommendations.size <= 3) { // Check size to avoid too many "combined" messages
+                if (recommendations.has("Frequency (Event) Recording") && recommendations.has("Duration Recording") && recommendations.size <= 3) { 
                     reasoningPoints.push("Often, combining Frequency and Duration Recording gives a more complete picture (e.g., how many times a behavior occurred and how long each instance lasted)[cite: 94, 201].");
                 }
                 if (recommendations.has("ABC Recording") && recommendations.size > 1 && recommendations.size <=3 ) {
                     reasoningPoints.push("ABC data can be supplemented with quantitative measures (like Frequency or Duration) to provide both contextual understanding and measurable change over time[cite: 121].");
                 }
 
-
                 recMethodP.textContent = recommendations.size > 0 ? Array.from(recommendations).join('; or ') : "Could not determine a primary recommendation. Consider direct observation and anecdotal notes first.";
                 
                 recReasoningUl.innerHTML = ''; 
                 reasoningPoints.forEach(point => {
                     const li = document.createElement('li');
+                    // Corrected regex for citation replacement
                     li.innerHTML = point.replace(/\/g, '<span style="font-style:italic; color: #555;"></span>');
                     recReasoningUl.appendChild(li);
                 });
-
                 recResultDiv.style.display = 'block';
             });
         }
 
-        if (recQuestionsContainer) displayRecQuestion(currentRecQuestionIndex); // Initial call for the first question
+        if (recQuestionsContainer) displayRecQuestion(currentRecQuestionIndex);
 
         const currentYearSpan = document.getElementById('currentYear');
         if (currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
     });
+</script>
 </script>
 </body>
 </html>
