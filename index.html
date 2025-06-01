@@ -403,7 +403,7 @@
                 <h4>Monitoring Interventions</h4>
                 <p>Systematic data collection allows for the evaluation of whether behavioral interventions are effective and leading to desired changes.</p>
             </div>
-            <div class="method-overview">
+            <div class.method-overview">
                 <h4>IEP Development & Tracking</h4>
                 <p>For students in special education, detailed behavior data is essential for developing Functional Behavioral Assessments (FBAs), Behavior Intervention Plans (BIPs), and tracking progress towards Individualized Education Program (IEP) goals.</p>
             </div>
@@ -993,14 +993,14 @@
                         recommendations.add("Frequency (Event) Recording");
                         reasoningPoints.push("For behaviors with a clear start and end, Frequency Recording counts how many times it occurs, which is ideal for tracking increases or decreases.");
                     }
-                    if (infoNeeded === 'howLong' && !recommendations.has("Duration Recording")) { // Add only if not already there
+                    if (infoNeeded === 'howLong' && !recommendations.has("Duration Recording")) { 
                         recommendations.add("Duration Recording");
                         reasoningPoints.push("If the length of each discrete instance is important (e.g., short vs. long episodes of a specific action), use Duration Recording.");
                     }
                 }
                 if (behaviorNature === 'continuous' || (behaviorNature === 'discrete' && infoNeeded === 'proportionOfTime')) { 
                     if (infoNeeded === 'howLong' || infoNeeded === 'proportionOfTime') {
-                        if (!recommendations.has("Duration Recording")) { // Add only if not already there
+                        if (!recommendations.has("Duration Recording")) { 
                              recommendations.add("Duration Recording");
                              reasoningPoints.push("For continuous behaviors, or when the total time spent in a behavior is key, Duration Recording is suitable.");
                         }
@@ -1011,11 +1011,11 @@
                         reasoningPoints.push("For ongoing behaviors, or if continuous observation is difficult, Interval Recording or Momentary Time Sampling can provide an estimate of how often or what proportion of time the behavior occurs. MTS is often easier for teachers managing a class.");
                     }
                 }
-                if (recommendations.size === 0) { // Fallback if no specific rules matched well
+                if (recommendations.size === 0) { 
                      recommendations.add("Direct Observation with Anecdotal Notes");
                      reasoningPoints.push("If the behavior is complex or the best measurement isn't immediately clear, start with detailed narrative (anecdotal) notes during direct observation. This can help clarify the behavior's characteristics and guide the selection of a more specific data collection method later.");
                 }
-                if (recommendations.has("Frequency (Event) Recording") && recommendations.has("Duration Recording") && recommendations.size <= 3) { // Check if both are present and not too many other methods
+                if (recommendations.has("Frequency (Event) Recording") && recommendations.has("Duration Recording") && recommendations.size <= 3) { 
                     reasoningPoints.push("Often, combining Frequency and Duration Recording gives a more complete picture (e.g., how many times a behavior occurred and how long each instance lasted).");
                 }
                 if (recommendations.has("ABC Recording") && recommendations.size > 1 && recommendations.size <=3 ) {
@@ -1028,7 +1028,7 @@
                 recReasoningUl.innerHTML = ''; // Clear previous reasoning
                 reasoningPoints.forEach(point => {
                     const li = document.createElement('li');
-                    li.textContent = point; // Removed the replace for italics as citations are removed
+                    li.textContent = point; 
                     recReasoningUl.appendChild(li);
                 });
                 recResultDiv.style.display = 'block';
