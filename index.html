@@ -647,7 +647,7 @@
         intervalSheet: () => `
             <p>This template is designed for weekly tracking of multiple behaviors in fixed 15-minute intervals, including intensity ratings and location, similar to the provided example.</p>
             <label for="intervalBehaviorsList">Behaviors to Track (comma-separated, e.g., ES, AS, A, VO, PD, R, NB):</label>
-            <input type="text" id="intervalBehaviorsList" name="intervalBehaviorsList" placeholder="e.g., ES (Elopement/Escape), AS (Attention-Seeking), A (Aggression), VO (Verbal Outburst), PD (Property Destruction), R (Refusal/Non-Compliance), NB (Negative Body Language)" required>
+            <input type="text" id="intervalBehaviorsList" name="intervalBehaviorsList" placeholder="e.g., ES, AS, A, VO, PD, R, NB" required>
             
             <label for="intervalOperationalDef">Operational Definitions (Define EACH behavior listed above. Be specific!):</label>
             <textarea id="intervalOperationalDef" name="intervalOperationalDef" rows="6" placeholder="Example:\nES (Elopement/Escape): Student leaves designated area without permission.\nAS (Attention-Seeking): Student makes noises or calls out to gain adult/peer attention.\nA (Aggression): Student hits, kicks, or bites others.\nVO (Verbal Outburst): Student yells, screams, or uses profanity.\nPD (Property Destruction): Student tears papers, breaks objects, or writes on property.\nR (Refusal/Non-Compliance): Student states 'no' or ignores instruction for >10 seconds.\nNB (Negative Body Language): Student frowns, rolls eyes, or slumps in seat when presented with a task."></textarea>
@@ -658,7 +658,7 @@
                 <option value="whole">Whole Interval (occurs for the entire interval)</option>
                 <option value="momentary">Momentary Time Sampling (occurs at the moment interval ends)</option>
             </select>
-            <p style="font-size: 0.8em; color: var(--text-soft-color);">Note: For this comprehensive weekly sheet, Partial Interval is often recommended for tracking any occurrence of a target behavior. [cite: 1, 41]</p>
+            <p style="font-size: 0.8em; color: var(--text-soft-color);">Note: For this comprehensive weekly sheet, Partial Interval is often recommended for tracking any occurrence of a target behavior.</p>
 
             <label for="intensityScale">Intensity Scale Definition (e.g., 1=Low, 5=High):</label>
             <input type="text" id="intensityScale" name="intensityScale" placeholder="e.g., 1 (Low) to 5 (High Impact)">
@@ -806,15 +806,10 @@
                 generatorOptionsContainer.innerHTML = generatorFieldConfigurations[type]();
                 // Re-attach event listener for intensity checkbox if intervalSheet is selected
                 if (type === 'intervalSheet') {
-                    const intensityCheckbox = document.getElementById('includeIntensity');
-                    const intensityScaleDiv = document.getElementById('intensityScaleOption');
-                    if (intensityCheckbox && intensityScaleDiv) {
-                        intensityCheckbox.addEventListener('change', function() {
-                            intensityScaleDiv.style.display = this.checked ? 'block' : 'none';
-                        });
-                        // Ensure it's correctly displayed on subsequent selections if already checked
-                        intensityScaleDiv.style.display = intensityCheckbox.checked ? 'block' : 'none';
-                    }
+                    const intensityCheckbox = document.getElementById('includeIntensity'); // This will no longer exist in intervalSheet config
+                    const intensityScaleDiv = document.getElementById('intensityScaleOption'); // This will no longer exist in intervalSheet config
+                    // The old logic for showing/hiding intensity options based on checkbox is removed,
+                    // as intensity is now always included and configured by text input for intervalSheet
                 }
             } else {
                 generatorOptionsContainer.innerHTML = '<p>Select a template type to see options.</p>';
@@ -882,7 +877,7 @@
                         const freqIncludeLocation = document.getElementById('freqIncludeLocation')?.checked;
                         const freqIncludeNotes = document.getElementById('freqIncludeNotes')?.checked;
 
-                        output += `Observation Period: ${obsPeriod} [cite: 501]\n\n`;
+                        output += `Observation Period: ${obsPeriod}\n\n`;
                         let freqHeader = `| Date | Time Start | Time End | Behavior Tracked (${mainBehaviorName}) | Tallies `;
                         let freqDivider = `|------|------------|----------|--------------------------|---------`;
                         let freqRow = `|      |            |          |                          |         `;
@@ -916,7 +911,7 @@
                         const durIncludeLocation = document.getElementById('durIncludeLocation')?.checked;
                         const durIncludeNotes = document.getElementById('durIncludeNotes')?.checked;
 
-                        output += `Method: Duration Recording (measures how long a behavior lasts) [cite: 89, 506]\n`;
+                        output += `Method: Duration Recording (measures how long a behavior lasts)\n`;
                         output += `Total Observation Period: ${durObservationPeriod}\n\n`;
                         
                         let durHeader = `| Date | Time Start | Time End | Duration (min:sec) `;
@@ -951,12 +946,12 @@
                         const abcTargetBehavior = document.getElementById('abcTargetBehavior')?.value.trim() || '';
                         const abcIncludeHypothesis = document.getElementById('abcIncludeHypothesis')?.checked;
 
-                        output += `Instructions: For each observed instance of the target behavior(s), describe what happened just before (Antecedent), the Behavior itself, and what happened right after (Consequence). The goal is to identify patterns and the 'function' or 'why' behind the behavior. [cite: 31, 524]\n\n`
+                        output += `Instructions: For each observed instance of the target behavior(s), describe what happened just before (Antecedent), the Behavior itself, and what happened right after (Consequence). The goal is to identify patterns and the 'function' or 'why' behind the behavior.\n\n`
                         output += `| Date/Time | Setting/Activity | Antecedent (What happened BEFORE?) | Behavior (What did student DO - be specific, observable) | Consequence (What happened AFTER? How did others react?) |\n`;
                         output += `|-----------|------------------|------------------------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------------|\n`;
                         for(let i=0; i<8; i++) output += `|           |                  |                                                |                                                                 |                                                                     |\n`;
                         if (abcIncludeHypothesis) {
-                            output += `\nPossible Function/Purpose Hypothesis (Why do you think the behavior is occurring? e.g., Attention, Escape, Tangible, Sensory)[cite: 235, 59]:\n\n`;
+                            output += `\nPossible Function/Purpose Hypothesis (Why do you think the behavior is occurring? e.g., Attention, Escape, Tangible, Sensory):\n\n`;
                         }
                         output += `\nSummary of Patterns/Insights:\n\n`;
                         break;
@@ -971,7 +966,7 @@
                         const timeIntervals = [
                             '7:00-7:15 am', '7:15-7:30 am', '7:30-7:45 am', '7:45-8:00 am',
                             '8:00-8:15 am', '8:15-8:30 am', '8:30-8:45 am', '8:45-9:00 am',
-                            '9:00-9:15 am', '9:15-9:30 am', '9:30-9:45 am', '9:45-10:00 am',
+                            '9:00-9:15 am', '9:15-9:30am', '9:30-9:45 am', '9:45-10:00 am',
                             '10:00-10:15 am', '10:15-10:30 am', '10:30-10:45 am', '10:45-11:00 am',
                             '11:00-11:15 am', '11:15-11:30 am', '11:30-11:45 am', '11:45-12:00 pm',
                             '12:00-12:15 pm', '12:15-12:30 pm', '12:30-12:45 pm', '12:45-1:00 pm',
@@ -979,9 +974,10 @@
                             '2:00-2:15 pm', '2:15-2:30 pm', '2:30-2:45 pm', '2:45-3:00 pm'
                         ];
                         
-                        output += `Method: ${intervalTypeVal.charAt(0).toUpperCase() + intervalTypeVal.slice(1)} Interval Recording (Time Sampling) [cite: 125, 499]\n`;
-                        output += `Instructions: For each time interval, mark the behavior codes that occurred (according to the interval type) and rate the intensity of any problem behavior. [cite: 1]\n\n`;
+                        output += `Method: ${intervalTypeVal.charAt(0).toUpperCase() + intervalTypeVal.slice(1)} Interval Recording (Time Sampling)\n`;
+                        output += `Instructions: For each time interval, mark the behavior codes that occurred (according to the interval type) and rate the intensity of any problem behavior.\n\n`;
                         output += `Intensity Scale: ${intensityScaleText}\n\n`;
+                        
                         output += `Target Behaviors & Codes:\n`;
                         const behaviorOpDef = document.getElementById('intervalOperationalDef')?.value.trim();
                         if (behaviorOpDef) {
@@ -992,17 +988,19 @@
 
                         // Top header for intensity
                         output += `AM Intensity ${'  1  2  3  4  5    '.repeat(5)}\n`;
-                        output += `PM Intensity ${'  1  2  3  4  5    '.repeat(5)}\n`;
+                        output += `PM Intensity${'   1  2  3  4  5    '.repeat(5)}\n`; // Adjusted padding
 
                         // Main table header
                         let headerRow1 = '| Time intervals ';
                         let headerRow2 = '|----------------';
-                        let headerRow3 = '|                '; // For Intensity values 1-5
+                        
+                        const behaviorCodeHeaderPart = behaviorCodes.map(code => code.padEnd(2)).join('  ');
+                        const behaviorCodeDividerPart = behaviorCodes.map(() => '-').join('   '); // Underscores for checkboxes
 
                         daysOfWeek.forEach(day => {
-                            headerRow1 += `| ${day.padEnd(behaviorCodes.join('  ').length + 10)} `; // Day name, padded for behaviors + intensity + location
-                            headerRow2 += `| Location | ${behaviorCodes.map(code => code.padEnd(2)).join('  ')} | 1 2 3 4 5 `; // Location, behavior codes, intensity
-                            headerRow3 += `|          | ${behaviorCodes.map(code => '-').join('   ')} |         `; // Underscores for checkboxes
+                            const columnWidth = behaviorCodeHeaderPart.length + '  1  2  3  4  5'.length + 'Location'.length + 5; // Approx width for all columns
+                            headerRow1 += `| ${day.padEnd(columnWidth)} `; 
+                            headerRow2 += `| Location | ${behaviorCodeHeaderPart} | 1  2  3  4  5 `;
                         });
                         output += headerRow1 + '|\n';
                         output += headerRow2 + '|\n';
@@ -1010,13 +1008,13 @@
                         timeIntervals.forEach(interval => {
                             let row = `| ${interval.padEnd(14)} `;
                             daysOfWeek.forEach(day => {
-                                row += `|          | ${behaviorCodes.map(code => ' ').join('  ')} | 1 2 3 4 5 `;
+                                row += `|          | ${behaviorCodes.map(code => ' ').join('  ')} | 1  2  3  4  5 `;
                             });
                             output += row + '|\n';
                         });
 
-                        output += `\nTotal # of Behaviors: ${'___________ '.repeat(daysOfWeek.length)}\n`;
-                        output += `Percentage of behavior: ${'___________ '.repeat(daysOfWeek.length)}\n`;
+                        output += `\nTotal # of Behaviors: ${'_________'.repeat(daysOfWeek.length).slice(0, -1)} \n`; // Shorter repeat
+                        output += `Percentage of behavior: ${'_________'.repeat(daysOfWeek.length).slice(0, -1)}\n`; // Shorter repeat
                         output += `\nAdditional Notes:\n\n`;
                         break;
 
@@ -1026,7 +1024,7 @@
                         const latAntecedent = document.getElementById('latAntecedent')?.value || 'Instruction given';
                         const latIncludeNotes = document.getElementById('latIncludeNotes')?.checked;
 
-                        output += `Method: Latency Recording (measures time from prompt to behavior onset) [cite: 14, 516]\n`;
+                        output += `Method: Latency Recording (measures time from prompt to behavior onset)\n`;
                         output += `Antecedent/Prompt: ${latAntecedent}\n\n`;
                         
                         let latHeader = `| Date | Time of Prompt | Time Behavior Began | Latency (sec) `;
@@ -1214,32 +1212,32 @@
                 // Primary recommendations based on 'infoNeeded' and 'behaviorNature'
                 if (infoNeeded === 'whenAndWhy') {
                     recommendations.add("ABC Recording");
-                    reasoningPoints.push("ABC Recording is crucial for understanding the context, triggers (Antecedents), and outcomes (Consequences) that maintain a behavior. This is vital for functional behavioral assessments. [cite: 31, 524]");
+                    reasoningPoints.push("ABC Recording is crucial for understanding the context, triggers (Antecedents), and outcomes (Consequences) that maintain a behavior. This is vital for functional behavioral assessments.");
                 }
                 if (infoNeeded === 'speedOfResponse') {
                     recommendations.add("Latency Recording");
-                    reasoningPoints.push("Latency Recording directly measures the time delay between a prompt/instruction and the onset of the behavior, ideal for assessing compliance or task initiation. [cite: 14, 516]");
+                    reasoningPoints.push("Latency Recording directly measures the time delay between a prompt/instruction and the onset of the behavior, ideal for assessing compliance or task initiation.");
                 }
                 if (infoNeeded === 'howOften' && behaviorNature === 'discrete') {
                     recommendations.add("Frequency (Event) Recording");
-                    reasoningPoints.push("For discrete behaviors with a clear start and end, Frequency Recording provides an exact count of occurrences, ideal for tracking increases or decreases. [cite: 11, 500]");
+                    reasoningPoints.push("For discrete behaviors with a clear start and end, Frequency Recording provides an exact count of occurrences, ideal for tracking increases or decreases.");
                 }
                 if (infoNeeded === 'howLong' || infoNeeded === 'proportionOfTime') {
                     if (behaviorNature === 'continuous' || (behaviorNature === 'discrete' && infoNeeded === 'howLong')) {
                         recommendations.add("Duration Recording");
-                        reasoningPoints.push("Duration Recording is best when the length of time a behavior occurs is the primary concern, such as tantrums or on-task behavior. [cite: 89, 506]");
+                        reasoningPoints.push("Duration Recording is best when the length of time a behavior occurs is the primary concern, such as tantrums or on-task behavior.");
                     }
                 }
                 if (infoNeeded === 'proportionOfTime' || behaviorNature === 'continuous') {
                     if (observerAvailability === 'intermittentMultitasking') {
                         recommendations.add("Momentary Time Sampling");
-                        reasoningPoints.push("Momentary Time Sampling is practical for ongoing behaviors when the observer is multitasking, requiring checks only at specific moments. [cite: 129, 513]");
+                        reasoningPoints.push("Momentary Time Sampling is practical for ongoing behaviors when the observer is multitasking, requiring checks only at specific moments.");
                     } else {
                         recommendations.add("Interval Recording (Partial or Whole)");
-                        reasoningPoints.push("For high-frequency or continuous behaviors, Interval Recording (Partial or Whole) provides an estimate of behavior occurrence, managing observer workload. [cite: 125, 511]");
+                        reasoningPoints.push("For high-frequency or continuous behaviors, Interval Recording (Partial or Whole) provides an estimate of behavior occurrence, managing observer workload.");
                         // Add specific type recommendation based on the goal
                         if (behaviorNature === 'continuous' && infoNeeded === 'proportionOfTime') {
-                            reasoningPoints.push("Use Whole-Interval for sustained behaviors to increase (e.g., on-task) or Partial-Interval for any occurrence of behavior to decrease (e.g., self-stimulatory). [cite: 144, 41]");
+                            reasoningPoints.push("Use Whole-Interval for sustained behaviors to increase (e.g., on-task) or Partial-Interval for any occurrence of behavior to decrease (e.g., self-stimulatory).");
                         }
                     }
                 }
@@ -1247,37 +1245,37 @@
                 // Secondary/Refinement based on other factors
                 if (behaviorSeverity === 'severeHighImpact' && !recommendations.has("ABC Recording")) {
                     recommendations.add("ABC Recording");
-                    reasoningPoints.push("For severe behaviors, ABC Recording is highly recommended to understand the function and inform effective, function-based interventions. [cite: 41, 525]");
+                    reasoningPoints.push("For severe behaviors, ABC Recording is highly recommended to understand the function and inform effective, function-based interventions.");
                 }
                 if (needBaseline === 'yes' && recommendations.size === 0) {
                     recommendations.add("Frequency (Event) Recording");
-                    reasoningPoints.push("Frequency Recording is a straightforward way to establish a baseline for discrete behaviors. [cite: 70, 27]");
+                    reasoningPoints.push("Frequency Recording is a straightforward way to establish a baseline for discrete behaviors.");
                 }
                 if (needBaseline === 'yes' && behaviorNature === 'complex' && !recommendations.has("ABC Recording")) {
                      recommendations.add("ABC Recording");
-                     reasoningPoints.push("For complex behaviors or when the 'why' is unknown, ABC Recording helps uncover patterns and hypothesize function, which is critical for baseline understanding. [cite: 40, 525]");
+                     reasoningPoints.push("For complex behaviors or when the 'why' is unknown, ABC Recording helps uncover patterns and hypothesize function, which is critical for baseline understanding.");
                 }
                 if (behaviorNature === 'complex' && recommendations.size === 0) {
                     recommendations.add("Narrative Observation (Anecdotal Records)");
-                    reasoningPoints.push("For complex behaviors or when initial understanding is needed, narrative observations provide rich qualitative detail and context, helping to identify what to quantify later. [cite: 13, 179]");
+                    reasoningPoints.push("For complex behaviors or when initial understanding is needed, narrative observations provide rich qualitative detail and context, helping to identify what to quantify later.");
                 }
 
                 // Combination recommendations
                 if (recommendations.has("ABC Recording") && (recommendations.has("Frequency (Event) Recording") || recommendations.has("Duration Recording") || recommendations.has("Interval Recording (Partial or Whole)") || recommendations.has("Momentary Time Sampling"))) {
-                    reasoningPoints.push("Often, combining ABC data with quantitative measures (like Frequency, Duration, or Interval Recording) provides both contextual understanding and measurable change over time. [cite: 182, 5]");
+                    reasoningPoints.push("Often, combining ABC data with quantitative measures (like Frequency, Duration, or Interval Recording) provides both contextual understanding and measurable change over time.");
                 }
                 if (recommendations.has("Frequency (Event) Recording") && recommendations.has("Duration Recording") && recommendations.size <= 2) {
-                    reasoningPoints.push("For discrete behaviors, combining Frequency and Duration provides a comprehensive picture of how often it occurs and how long each instance lasts. [cite: 5, 509]");
+                    reasoningPoints.push("For discrete behaviors, combining Frequency and Duration provides a comprehensive picture of how often it occurs and how long each instance lasts.");
                 }
                 if (observerAvailability === 'afterEvent' && !recommendations.has("Permanent Product Recording")) {
                     recommendations.add("Permanent Product Recording");
-                    reasoningPoints.push("When direct observation is not feasible, Permanent Product recording (e.g., examining completed assignments, damaged items) can be used, often as a supplement. [cite: 532, 32]");
+                    reasoningPoints.push("When direct observation is not feasible, Permanent Product recording (e.g., examining completed assignments, damaged items) can be used, often as a supplement.");
                 }
 
 
                 if (recommendations.size === 0) {
                     recommendations.add("Narrative Observation (Anecdotal Records)");
-                    reasoningPoints.push("If the behavior is complex or the best measurement isn't immediately clear, start with detailed narrative (anecdotal) notes during direct observation. This can help clarify the behavior's characteristics and guide the selection of a more specific data collection method later. [cite: 13, 179]");
+                    reasoningPoints.push("If the behavior is complex or the best measurement isn't immediately clear, start with detailed narrative (anecdotal) notes during direct observation. This can help clarify the behavior's characteristics and guide the selection of a more specific data collection method later.");
                 }
 
                 recMethodP.textContent = recommendations.size > 0 ? Array.from(recommendations).join('; or ') : "Could not determine a primary recommendation. Consider starting with Narrative Observation.";
