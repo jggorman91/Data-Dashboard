@@ -345,7 +345,7 @@
                 padding: 4px;
                 text-align: center;
                 vertical-align: middle; /* Changed to middle for better visual balance with wrapping text */
-                word-wrap: break-word; /* Ensure long words break */
+                word-wrap: break-word; /* Ensure long words break within cell */
                 font-size: 9pt;
             }
             #printContent th {
@@ -355,20 +355,21 @@
             #printContent .small-text {
                 font-size: 8pt;
             }
-            #printContent .no-break-span { /* For content that should NOT break within itself, like circled initials */
-                white-space: nowrap;
+            /* .no-break-span is for content that should NOT break within itself, like circled initials */
+            #printContent .no-break-span { 
+                white-space: nowrap; 
             }
             /* Specific column widths for better print layout */
             #printContent table.interval-sheet-table tr th:first-child,
             #printContent table.interval-sheet-table tr td:first-child {
                 width: 70px; /* Time interval column */
             }
-            /* Dynamic widths for sub-columns under each day */
-            #printContent table.interval-sheet-table th.day-sub-header {
-                 min-width: 45px; /* Minimum width for location, behaviors, intensity cells */
-            }
+            .location-cell { width: 45px; } 
+            .behaviors-cell { width: 110px; } /* Adjusted width */
+            .intensity-cell { width: 55px; } 
+            
             /* Circled behavior initials style */
-            #printContent .circle {
+            .circle {
                 border: 1px solid #000;
                 border-radius: 50%;
                 padding: 0 3px; /* Slightly increased padding for better circle appearance */
@@ -747,12 +748,11 @@
                 // Show/hide intensity scale input based on checkbox
                 const intensityCheckboxPDF = document.getElementById('includeIntensityPDF');
                 const intensityScaleDivPDF = document.getElementById('intensityScaleOptionPDF');
-                const locationCheckboxPDF = document.getElementById('includeLocationPDF'); // New reference
-
                 if (intensityCheckboxPDF && intensityScaleDivPDF) {
                     intensityCheckboxPDF.addEventListener('change', function() {
                         intensityScaleDivPDF.style.display = this.checked ? 'block' : 'none';
                     });
+                     // Set initial state based on checkbox if it's already checked on load
                     intensityScaleDivPDF.style.display = intensityCheckboxPDF.checked ? 'block' : 'none';
                 }
             <\/script>
@@ -945,13 +945,12 @@
                 const opDefInputId = (type.startsWith('freq') ? 'freqOperationalDef' :
                                      type.startsWith('dur') ? 'durOperationalDef' :
                                      (type.startsWith('interval')) ? 'intervalOperationalDef' : // covers plain text
-                                     (type.startsWith('intervalSheetPDF')) ? 'intervalOperationalDefPDF' : // covers PDF
                                      type.startsWith('lat') ? 'latOperationalDef' :
                                      type.startsWith('abc') ? 'abcOperationalDef' : null);
 
 
-                if (document.getElementById(opDefInputId)) { // Use opDefInputId directly
-                    operationalDefText = document.getElementById(opDefInputId).value.trim();
+                if (document.getElementById(opDefInputId + suffix)) { // Add suffix here
+                    operationalDefText = document.getElementById(opDefInputId + suffix).value.trim();
                 }
 
                 if (type === 'frequencyLog') {
@@ -1078,7 +1077,7 @@
                         const intervalTypeVal = document.getElementById('intervalType')?.value || 'partial';
                         const includeIntensity = document.getElementById('includeIntensity')?.checked;
                         const intensityScaleText = document.getElementById('intensityScale')?.value || '1-5';
-                        const includeLocation = document.getElementById('includeLocation')?.checked;
+                        const includeLocation = document.getElementById('includeLocation')?.checked; // Get state for plain text version
 
 
                         const behaviorCodes = behaviorNamesStr.split(',').map(s => s.trim()).filter(s => s.length > 0);
@@ -1124,11 +1123,11 @@
                         // Calculate total width of one daily section (Optional Location + Behaviors + Optional Intensity)
                         let singleDailyBlockWidth = 0;
                         if (includeLocation) {
-                            singleDailyBlockWidth += locationColWidth + 3; // +3 for ' | '
+                            singleDailyBlockWidth += locationColWidth + 3; // ' | '
                         }
                         singleDailyBlockWidth += maxCircledBehaviorsLength;
                         if (includeIntensity) {
-                            singleDailyBlockWidth += 3 + intensityColWidth; // +3 for ' | '
+                            singleDailyBlockWidth += 3 + intensityColWidth; // ' | '
                         }
                         singleDailyBlockWidth = Math.max(singleDailyBlockWidth, daysOfWeek[0].length + 1); // Ensure day name fits minimum
 
@@ -1154,16 +1153,18 @@
                                 if (i > 0) {
                                     amPmIntensityHeader += ' | ';
                                     amPmIntensityHeaderLine2 += ' | ';
+                                } else { // For the first day, just add a space before the intensity block if no other separator
+                                    amPmIntensityHeader += ' ';
+                                    amPmIntensityHeaderLine2 += ' ';
                                 }
                                 amPmIntensityHeader += `${intensityColContent}`;
                                 amPmIntensityHeaderLine2 += `${intensityColContent}`;
                                 
-                                // Add padding for the rest of the daily block if it's wider than the content so far
-                                // This padding is the remaining space *within* the singleDailyBlockWidth after its own content
-                                let currentContentWidthInBlock = (includeLocation ? (locationColWidth + 3) : 0) + maxCircledBehaviorsLength + (includeIntensity ? (3 + intensityColWidth) : 0);
+                                // Add padding for the rest of the daily block if it's wider than just intensity content
+                                let currentContentWidthInBlock = (includeLocation ? (locationColWidth + 3) : 0) + maxCircledBehaviorsLength + (3 + intensityColWidth); // Calculate based on actual elements if present
                                 if (currentContentWidthInBlock < singleDailyBlockWidth) {
-                                    amPmIntensityHeader += ' '.repeat(singleDailyBlockWidth - currentContentWidthInBlock);
-                                    amPmIntensityHeaderLine2 += ' '.repeat(singleDailyBlockWidth - currentContentWidthInBlock);
+                                     amPmIntensityHeader += ' '.repeat(singleDailyBlockWidth - currentContentWidthInBlock);
+                                     amPmIntensityHeaderLine2 += ' '.repeat(singleDailyBlockWidth - currentContentWidthInBlock);
                                 }
                             }
                             output += `${amPmIntensityHeader.trimEnd()}\n`;
@@ -1220,7 +1221,7 @@
                         const intervalTypeValPDF = document.getElementById('intervalTypePDF')?.value || 'partial';
                         const includeIntensityPDF = document.getElementById('includeIntensityPDF')?.checked;
                         const intensityScaleTextPDF = document.getElementById('intensityScalePDF')?.value || '1-5';
-                        const includeLocationPDF = document.getElementById('includeLocationPDF')?.checked; // New checkbox state
+                        const includeLocationPDF = document.getElementById('includeLocationPDF')?.checked; // Get state for PDF version
 
 
                         const behaviorCodesPDF = behaviorNamesStrPDF.split(',').map(s => s.trim()).filter(s => s.length > 0);
@@ -1263,7 +1264,7 @@
                                         <tr>
                                             ${daysOfWeekPDF.map(day => `
                                                 ${includeLocationPDF ? '<th class="location-cell">Location</th>' : ''}
-                                                <th class="behaviors-cell no-break-span">${behaviorCodesPDF.map(code => `<span class="circle">${code}</span>`).join('&nbsp;')}</th>
+                                                <th class="behaviors-cell">${behaviorCodesPDF.map(code => `<span class="circle no-break-span">${code}</span>`).join('&nbsp;')}</th>
                                                 ${includeIntensityPDF ? '<th class="intensity-cell">1 2 3 4 5</th>' : ''}
                                             `).join('')}
                                         </tr>
@@ -1271,7 +1272,7 @@
                                     <tbody>
                                         ${timeIntervalsPDF.map(interval => `
                                             <tr>
-                                                <td class="time-interval-cell no-break-span">${interval}</td>
+                                                <td class="time-interval-cell">${interval}</td>
                                                 ${daysOfWeekPDF.map(day => `
                                                     ${includeLocationPDF ? '<td class="location-cell"></td>' : ''}
                                                     <td class="behaviors-cell"></td>
@@ -1321,7 +1322,12 @@
                                     th, td { border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle; word-wrap: break-word; } /* Allow text to wrap */
                                     th { background-color: #f2f2f2; font-weight: bold; }
                                     .small-text { font-size: 8pt; }
-                                    .no-break-span { white-space: nowrap; } /* Crucial: ensures (ES) itself doesn't wrap */
+                                    
+                                    /* .no-break-span is for content that should NOT break within itself, like circled initials */
+                                    .no-break-span { 
+                                        white-space: nowrap; 
+                                        display: inline-block; /* Essential for nowrap on inline elements */
+                                    }
                                     
                                     /* Specific column widths for better print layout */
                                     table.interval-sheet-table tr th:first-child,
@@ -1340,7 +1346,7 @@
                                         display: inline-block;
                                         min-width: 1.2em;
                                         text-align: center;
-                                        white-space: nowrap; /* Ensures (ES) stays on one line */
+                                        white-space: nowrap; /* Crucial: ensures (ES) itself doesn't wrap */
                                     }
                                 </style>
                             </head>
