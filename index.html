@@ -161,20 +161,6 @@
             margin-bottom: calc(var(--spacing-unit) * 0.6); /* 0.3rem */
         }
 
-        /* Homepage Specific */
-        .method-overview, .best-practice-item {
-            margin-bottom: calc(var(--spacing-unit) * 2.4);
-            padding: calc(var(--spacing-unit) * 2); /* 1rem */
-            border-left: 3px solid var(--primary-color);
-            background-color: #fdfdff;
-            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-        }
-        .method-overview h4, .best-practice-item h4 {
-            font-size: 1.1rem;
-            color: var(--primary-color-darker);
-            margin-bottom: calc(var(--spacing-unit) * 0.6);
-        }
-
         /* Resource Section & Interactive Tutorials */
         .tutorial-step {
             background-color: var(--light-gray-bg);
@@ -325,31 +311,91 @@
            }
 
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: calc(var(--spacing-unit) * 2.4);
-            background-color: var(--header-bg);
-            color: #adb5bd; /* Lighter gray for footer text */
-            font-size: 0.85rem;
-            margin-top: auto; /* Pushes footer to bottom */
+        /* Styles for PDF-Ready Sheet */
+        @media print {
+            body {
+                background-color: #fff;
+                margin: 0;
+                padding: 0;
+            }
+            header, nav, footer, .dashboard-section:not(#printContent) {
+                display: none !important;
+            }
+            #printContent {
+                display: block !important;
+                width: 100%;
+                margin: 0;
+                padding: 1cm;
+                box-shadow: none;
+                font-family: Arial, sans-serif;
+                font-size: 10pt;
+            }
+            #printContent h1, #printContent h2, #printContent h3, #printContent p {
+                color: #000;
+                margin-bottom: 0.5em;
+            }
+            #printContent table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 1em;
+            }
+            #printContent th, #printContent td {
+                border: 1px solid #000;
+                padding: 4px;
+                text-align: center;
+                vertical-align: top;
+                white-space: nowrap; /* Prevent wrapping in cells */
+                font-size: 9pt;
+            }
+            #printContent th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            #printContent .small-text {
+                font-size: 8pt;
+            }
+            #printContent .no-break {
+                white-space: nowrap;
+            }
+            /* Specific column widths for better print layout */
+            #printContent table.interval-sheet-table tr th:first-child,
+            #printContent table.interval-sheet-table tr td:first-child {
+                width: 70px; /* Time interval column */
+            }
+            #printContent table.interval-sheet-table th.day-header {
+                 min-width: 180px; /* Ensure sufficient width for daily blocks */
+            }
+            #printContent table.interval-sheet-table td.location-cell {
+                width: 50px;
+            }
+            #printContent table.interval-sheet-table td.behaviors-cell {
+                 width: 120px; /* Adjust based on max behaviors length */
+            }
+            #printContent table.interval-sheet-table td.intensity-cell {
+                width: 60px;
+            }
+            #printContent .intensity-row-top td, #printContent .intensity-row-bottom td {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+            #printContent .intensity-row-bottom td {
+                 border-top: none;
+                 padding-top: 0;
+                 padding-bottom: 0.5em;
+            }
+            #printContent .intensity-rating-options {
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+            }
+            #printContent .intensity-rating-options span {
+                border: 1px solid #ccc;
+                padding: 0 3px;
+                min-width: 1.2em;
+                text-align: center;
+            }
         }
-        footer p { margin-bottom: var(--spacing-unit); }
-        footer p:last-child { margin-bottom: 0; }
 
-
-        /* Accessibility */
-        .sr-only { /* Screen Reader Only */
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
 
         /* Responsive adjustments */
         @media (max-width: 860px) {
@@ -462,47 +508,47 @@
             <div id="method-frequency-content" class="tutorial-content">
                 <h4>What it is:</h4> <p>Counting how many times a specific, discrete behavior occurs within a defined observation period. Each occurrence of the target behavior is tallied. This method yields the frequency of the behavior (total count) and can be converted to a rate (count per unit of time) if observation sessions vary in length.</p>
                 <h4>Best for:</h4> <p>Behaviors that are discrete and have a clear beginning and end that do not occur so rapidly as to be hard to count. Examples include: number of times a student raises hand, instances of hitting, occurrences of a student leaving their seat, number of self-stimulatory behaviors (like hand flapping) in a period, or frequency of initiating peer interaction. It's also useful for positive behaviors.</p>
-                <h4>Tips:</h4> <ul><li>Operationally define the target behavior to ensure consistency and reliability.</li><li>Use simple tally marks, handheld tally counters, a sheet of paper, or moving coins from one pocket to another.</li><li>Note the length of the observation period to calculate a rate (e.g., 5 occurrences per 30 minutes = 0.17 per minute).</li><li>Can be done unobtrusively (e.g., using masking tape on an arm or clipboard, or the pocket technique with tokens).</li><li>Do not use for behaviors that occur at extremely high rates or last a long time, since counting becomes impractical or less meaningful for continuous behaviors.</li></ul>
+                <h4>Tips:</h4> <ul><li>Operationally define the target behavior to ensure consistency and reliability[cite: 19, 20].</li><li>Use simple tally marks, handheld tally counters, a sheet of paper, or moving coins from one pocket to another for each occurrence[cite: 21, 22].</li><li>Note the length of the observation period to calculate a rate (e.g., 5 occurrences per 30 minutes = 0.17 per minute)[cite: 23].</li><li>Can be done unobtrusively (e.g., using masking tape on an arm or clipboard, or the pocket technique with tokens)[cite: 29, 30].</li><li>Do not use for behaviors that occur at extremely high rates or last a long time, since counting becomes impractical or less meaningful for continuous behaviors[cite: 26, 25].</li></ul>
             </div>
 
             <div class="tutorial-step" data-target="method-duration" role="button" tabindex="0" aria-expanded="false" aria-controls="method-duration-content">Duration Recording</div>
             <div id="method-duration-content" class="tutorial-content">
-                <h4>What it is:</h4> <p>Measuring how long a behavior lasts from its onset to its end (e.g., length of a tantrum, time spent off-task). Instead of counting occurrences, you time the total amount of time the student engages in the target behavior, either each episode's length or the cumulative duration within an observation period.</p>
-                <h4>Best for:</h4> <p>Behaviors where the length of time is the primary concern, or behaviors that vary in length (e.g., a student's crying spells, time spent focused on a task, or how long a student is out of seat). It's also useful for positive behaviors like sustaining focus or cooperative play.</p>
-                <h4>Tips:</h4> <ul><li>Requires a timing device (stopwatch, timer app).</li><li>You can record each episode's duration, or accumulate the total duration over an observation period.</li><li>Can calculate total duration, average duration per occurrence, or a percentage of the observation period (e.g., "on-task 75% of the time").</li><li>Often useful to combine with frequency (e.g., 3 tantrums, average duration 5 minutes).</li><li>It can be challenging for a teacher to track duration while teaching; using a timer with an alarm or assigning another staff member can help.</li></ul>
+                <h4>What it is:</h4> <p>Measuring how long a behavior lasts from its onset to its end[cite: 89]. Instead of counting occurrences, you time the total amount of time the student engages in the target behavior, either each episode's length or the cumulative duration within an observation period[cite: 33].</p>
+                <h4>Best for:</h4> <p>Behaviors where the length of time is the primary concern, or behaviors that vary in length (e.g., a student's crying spells, time spent focused on a task, or how long a student is out of seat)[cite: 89]. It's also useful for positive behaviors like sustaining focus or cooperative play (e.g., increasing the duration of appropriate on-task behavior)[cite: 98].</p>
+                <h4>Tips:</h4> <ul><li>Define the behavior clearly (e.g., "out of seat" might be timed from the moment the student stands up until they return to seat)[cite: 90].</li><li>Use a stopwatch, timer, or timing app. Start timing when the behavior begins and stop when it ends[cite: 91, 34].</li><li>You can record each episode's duration, or accumulate the total duration over an observation period[cite: 92].</li><li>Can calculate total duration, average duration per occurrence, or a percentage of the observation period (e.g., "on-task 75% of the time")[cite: 95].</li><li>It can be challenging for a teacher to track duration while teaching; enlisting help (a co-teacher or aide with a stopwatch) or using tools like apps that allow quick start/stop taps can help[cite: 112].</li></ul>
             </div>
 
             <div class="tutorial-step" data-target="method-latency" role="button" tabindex="0" aria-expanded="false" aria-controls="method-latency-content">Latency Recording</div>
             <div id="method-latency-content" class="tutorial-content">
-                <h4>What it is:</h4> <p>Measuring the time that elapses between a given antecedent (stimulus) and the onset of the behavior. In schools, this often means timing how long it takes a student to comply with a direction or begin a task after being prompted.</p>
-                <h4>Best for:</h4> <p>Evaluating compliance and task initiation (short latency is usually desired), or assessing how quickly a behavior occurs after a trigger (e.g., how many seconds after a transition does a child begin to show signs of anxiety).</p>
-                <h4>Tips:</h4> <ul><li>Start timing when the antecedent or prompt is delivered and stop when the behavior begins.</li><li>Clearly define what constitutes the "start" of the behavior (for example, define what "begin task" looks like - pencil on paper, etc.).</li><li>Reported as an average or range (e.g., "on average, begins assignment 30 seconds after instructions (goal: within 10 seconds)").</li></ul>
+                <h4>What it is:</h4> <p>Measuring the time that elapses between a given antecedent (stimulus) and the onset of the behavior[cite: 516]. In schools, this often means timing how long it takes a student to comply with a direction or begin a task after being prompted[cite: 517].</p>
+                <h4>Best for:</h4> <p>Evaluating compliance and task initiation (short latency is usually desired)[cite: 520], or assessing how quickly a behavior occurs after a trigger (e.g., how many seconds after a transition does a child begin to show signs of anxiety)[cite: 520].</p>
+                <h4>Tips:</h4> <ul><li>Start a timer when the antecedent or prompt is delivered, and stop when the behavior starts[cite: 521].</li><li>Clearly define what constitutes the "start" of the behavior (for example, define what "begin task" looks like - pencil on paper, etc.)[cite: 523, 18].</li><li>Reported as an average or range (e.g., "on average, begins assignment 30 seconds after instructions (goal: within 10 seconds)")[cite: 522].</li></ul>
             </div>
 
             <div class="tutorial-step" data-target="method-interval" role="button" tabindex="0" aria-expanded="false" aria-controls="method-interval-content">Interval Recording & Time Sampling</div>
             <div id="method-interval-content" class="tutorial-content">
-                <h4>What it is:</h4> <p>Dividing an observation period into short, fixed intervals and recording whether the target behavior occurred. This provides an estimate of behavior frequency or percentage of time the behavior occurs, without having to count every single incident.</p>
+                <h4>What it is:</h4> <p>An observation method where you check for the behavior's occurrence during consecutive time intervals[cite: 125]. Instead of recording every instance, you observe the student at regular intervals (or across short sub-periods) and note whether the behavior occurred in each interval[cite: 126].</p>
                 <p>There are three main types:
                     <ul>
-                        <li>**Partial-Interval Recording:** Score the interval if the behavior happened at any time during that interval.</li>
-                        <li>**Whole-Interval Recording:** Score the interval only if the behavior occurred for the entire duration of that interval.</li>
-                        <li>**Momentary Time Sampling (MTS):** Look up at pre-set moments (usually the end of each interval) and mark whether the behavior is occurring at that exact moment.</li>
+                        <li>**Partial-Interval Recording:** Score the interval if the behavior happened at any time during that interval[cite: 127].</li>
+                        <li>**Whole-Interval Recording:** Score the interval only if the behavior occurred for the entire duration of that interval[cite: 128].</li>
+                        <li>**Momentary Time Sampling (MTS):** Look up at pre-set moments (usually the end of each interval) and mark whether the behavior is occurring at that exact moment[cite: 129].</li>
                     </ul>
                 </p>
-                <h4>Best for:</h4> <p>Behaviors that are high-rate or continuous, where event-by-event counting is impractical. It's also useful for behaviors without clear onset/offset, like off-task behavior ("not paying attention"), humming, fidgeting, or engagement in class.</p>
+                <h4>Best for:</h4> <p>Behaviors that are high-rate or continuous, where event-by-event counting is impractical[cite: 141]. It's also useful for behaviors without clear onset/offset, like off-task behavior ("not paying attention"), humming, fidgeting, or engagement in class[cite: 142].</p>
                 <ul>
-                    <li>Use **Partial-Interval** when you want to capture any occurrence and are okay with potentially overestimating how much it happens. This is often chosen for decreasing behaviors.</li>
-                    <li>Use **Whole-Interval** when interested in continuous engagement or a behavior to increase.</li>
-                    <li>**Momentary Time Sampling** is great for general classroom behaviors or multiple students because you don't have to watch constantly. It's effective for frequently occurring or long-lasting behaviors like on/off task behavior, social involvement, etc..</li>
+                    <li>Use **Partial-Interval** when you want to capture any occurrence and are okay with potentially overestimating how much it happens. This is often chosen for decreasing behaviors[cite: 144, 41].</li>
+                    <li>Use **Whole-Interval** when interested in continuous engagement or a behavior to increase[cite: 145].</li>
+                    <li>**Momentary Time Sampling** is great for general classroom behaviors or multiple students because you don't have to watch constantly. It's effective for frequently occurring or long-lasting behaviors like on/off task behavior, social involvement, etc.[cite: 146, 40].</li>
                 </ul>
-                <h4>Tips:</h4> <ul><li>Choose interval length appropriate for the behavior (e.g., 10-30 seconds). Shorter intervals give more accuracy but are harder to manage.</li><li>Partial-interval recording tends to overestimate total behavior occurrence, whereas whole-interval can underestimate.</li><li>Momentary time sampling is convenient for observers because they only need to pay attention at the signal moments.</li><li>Often reported as a percentage of intervals in which behavior occurred.</li><li>Do not use coarse time sampling for very infrequent behaviors as important events could be missed.</li></ul>
+                <h4>Tips:</h4> <ul><li>Decide on a total observation period and split it into equal intervals. Intervals could be as short as a few seconds or as long as several minutes[cite: 133].</li><li>Shorter intervals give more accuracy but are harder to manage; longer intervals are easier but less precise[cite: 160]. A good rule is to use the shortest interval you can handle consistently[cite: 161].</li><li>Partial-interval recording tends to overestimate total behavior occurrence, whereas whole-interval can underestimate[cite: 140]. Momentary time sampling often strikes a good balance and has no consistent over- or underestimation if intervals are reasonably small relative to behavior length[cite: 164].</li><li>Do not use coarse time sampling for very infrequent behaviors as important events could be missed[cite: 25].</li></ul>
             </div>
 
             <div class="tutorial-step" data-target="method-abc" role="button" tabindex="0" aria-expanded="false" aria-controls="method-abc-content">ABC Recording (Antecedent-Behavior-Consequence)</div>
             <div id="method-abc-content" class="tutorial-content">
-                <h4>What it is:</h4> <p>A structured observational method that focuses on what happens immediately before a behavior (Antecedent), the behavior itself, and what happens after (Consequence). In practice, an observer documents each occurrence of a target behavior along with its antecedent and consequence, often using an ABC data form. The goal is to reveal patterns about triggers and outcomes that maintain the behavior.</p>
-                <h4>Best for:</h4> <p>Determining the function of a behavior or the factors triggering and reinforcing it. It is especially effective for challenging behaviors that seem to serve a purpose (e.g., seeking attention, avoiding a task, sensory stimulation, etc.).</p>
-                <h4>Tips:</h4> <ul><li>Identify a specific target behavior to track (e.g., "shouting out in class" or "withdrawing from group activity").</li><li>Record the Antecedent (what happened right before), Behavior (observable action), and Consequence (what happened right after and how others responded).</li><li>Requires careful, objective, and specific descriptions in note-taking for each incident.</li><li>Collect data across multiple instances (e.g., 8-10 or more) to identify clear patterns.</li><li>Can be time- and labor-intensive because it requires real-time documentation of detailed sequences.</li><li>Consider using abbreviations or a checklist format for common antecedents and consequences to make it manageable.</li></ul>
+                <h4>What it is:</h4> <p>A structured observational method that focuses on what happens immediately before a behavior (Antecedent), the behavior itself, and what happens after (Consequence)[cite: 31]. An observer documents each occurrence of a target behavior along with its antecedent and consequence, often using an ABC data form[cite: 32]. The goal is to reveal patterns about triggers and outcomes that maintain the behavior[cite: 32, 4].</p>
+                <h4>Best for:</h4> <p>Determining the function of a behavior or the factors triggering and reinforcing it[cite: 40]. It is especially effective for challenging behaviors that seem to serve a purpose (e.g., seeking attention, avoiding a task, sensory stimulation, etc.)[cite: 41].</p>
+                <h4>Tips:</h4> <ul><li>Identify a specific target behavior to track (e.g., "shouting out in class" or "withdrawing from group activity")[cite: 32].</li><li>Record the Antecedent (what happened right before), Behavior (observable action), and Consequence (what happened right after and how others responded)[cite: 33, 35, 37].</li><li>Record the time and setting, as patterns may depend on when/where the behavior occurs[cite: 39].</li><li>It often takes multiple ABC observations (e.g., 8-10 instances) to see a clear pattern[cite: 39].</li><li>Consider using abbreviations or a checklist format for common antecedents and consequences to make it manageable[cite: 52, 53].</li><li>Always collect enough episodes (over several days or classes if needed) to see reliable patterns[cite: 54].</li></ul>
             </div>
         </section>
 
@@ -519,7 +565,8 @@
                             <option value="frequencyLog">Frequency Count Log</option>
                             <option value="durationLog">Duration Log</option>
                             <option value="abcChart">ABC Chart</option>
-                            <option value="intervalSheet">Interval Recording Sheet (Weekly)</option>
+                            <option value="intervalSheet">Interval Recording Sheet (Weekly - Plain Text)</option>
+                            <option value="intervalSheetPDF">Interval Recording Sheet (Weekly - PDF-Ready)</option>
                             <option value="latencyLog">Latency Log</option>
                         </select>
                     </div>
@@ -560,31 +607,31 @@
             <p>Ensuring high-quality data collection is essential for its utility and ethical application.</p>
             <div class="best-practice-item">
                 <h4>Use Clear Operational Definitions</h4>
-                <p>Always define behaviors in specific, observable, and measurable terms before starting. Ensure all observers use the same definition, as this improves consistency and objectivity. For example, "off-task" might be defined as "not looking at instructional materials or not engaging in the assigned task for at least 5 consecutive seconds". Clear definitions ensure consistency in what you record and are critical if multiple observers or AI systems will use the data.</p>
+                <p>Always define behaviors in specific, observable, and measurable terms before starting. Ensure all observers use the same definition, as this improves consistency and objectivity. For example, "off-task" might be defined as "not looking at instructional materials or not engaging in the assigned task for at least 5 consecutive seconds". Clear definitions ensure consistency in what you record and are critical if multiple observers or AI systems will use the data[cite: 187, 188, 189, 4].</p>
             </div>
             <div class="best-practice-item">
                 <h4>Train Observers</h4>
-                <p>Teachers, aides, or specialists collecting data should be trained in the observation techniques and familiar with the behavior definitions. Conduct occasional interobserver reliability (IOR) checks by having two observers simultaneously record data and then compare their recordings. This process verifies that data collection is consistent between people. If discrepancies arise, further clarify definitions or provide practice to observers.</p>
+                <p>Teachers, aides, or specialists collecting data should be trained in the observation techniques and familiar with the behavior definitions. Conduct occasional interobserver reliability (IOR) checks by having two observers simultaneously record data and then compare their recordings. This process verifies that data collection is consistent between people[cite: 204]. If discrepancies arise, further clarify definitions or provide practice to observers[cite: 205].</p>
             </div>
             <div class="best-practice-item">
                 <h4>Be Objective and Minimize Bias</h4>
-                <p>Record factual observations (e.g., "Johnny stood up and walked around the room during math for 3 minutes") rather than subjective labels ("Johnny was being annoying"). Using structured data sheets or apps with preset categories can help objectify data. Always describe, don't judge. Avoid emotional or subjective terms like "rude," "hyper," or "upset" in your raw notes; instead note the observable indicators (tone of voice, specific words, body language). Monitor positive behaviors so the focus isn't solely on negatives. Cultural competence is key: behaviors might have different meanings in different cultural contexts, so being aware of such differences can prevent misinterpretation.</p>
+                <p>Record factual observations (e.g., "Johnny stood up and walked around the room during math for 3 minutes") rather than subjective labels ("Johnny was being annoying"). Using structured data sheets or apps with preset categories can help objectify data[cite: 546]. Always describe, don't judge. Avoid emotional or subjective terms like "rude," "hyper," or "upset" in your raw notes; instead note the observable indicators (tone of voice, specific words, body language)[cite: 196, 197]. Monitor positive behaviors so the focus isn't solely on negatives[cite: 547]. Cultural competence is key: behaviors might have different meanings in different cultural contexts, so being aware of such differences can prevent misinterpretation[cite: 360, 362].</p>
             </div>
             <div class="best-practice-item">
                 <h4>Collect Data Consistently</h4>
-                <p>Use the same methods and definitions over time, especially when comparing baseline data to intervention data. Conduct observations during the relevant times and settings for the behavior. To compare data, try to keep observation sessions consistent in length and context (e.g., always 15 minutes during morning meeting). Determine appropriate frequency of data collection based on need and feasibility, balancing data needs with classroom demands and behavior severity. Tier 1 data might be class-wide weekly/monthly; Tier 2 daily/per period; Tier 3 might require high-frequency data for an FBA/BIP.</p>
+                <p>Use the same methods and definitions over time, especially when comparing baseline data to intervention data[cite: 544]. Conduct observations during the relevant times and settings for the behavior. To compare data, try to keep observation sessions consistent in length and context (e.g., always 15 minutes during morning meeting)[cite: 194, 31]. Determine appropriate frequency of data collection based on need and feasibility, balancing data needs with classroom demands and behavior severity. Tier 1 data might be class-wide weekly/monthly; Tier 2 daily/per period; Tier 3 might require high-frequency data for an FBA/BIP[cite: 550, 551].</p>
             </div>
             <div class="best-practice-item">
                 <h4>Ensure Ethical Use and Privacy</h4>
-                <p>Treat behavior data as confidential student information. Maintain confidentiality by storing notes and data securely (locked file or password-protected digital file). If using digital tools, ensure they comply with privacy laws (like FERPA) and district policies. Only authorized personnel should access individual student behavior data, and sharing should be done thoughtfully. Obtain parental consent if data collection goes beyond routine classroom practice or for formal evaluations. Data should be used to help the student, not to label or punish without basis. Always be transparent about why you are collecting data and how it will be used, at least to the school administration and, if appropriate, to parents and the student.</p>
+                <p>Treat behavior data as confidential student information[cite: 335, 553]. Maintain confidentiality by storing notes and data securely (locked file or password-protected digital file)[cite: 336, 53]. If using digital tools, ensure they comply with privacy laws (like FERPA) and district policies[cite: 339, 554]. Only authorized personnel should access individual student behavior data, and sharing should be done thoughtfully[cite: 336, 555]. Obtain parental consent if data collection goes beyond routine classroom practice or for formal evaluations[cite: 344, 556]. Data should be used to help the student, not to label or punish without basis[cite: 557]. Always be transparent about why you are collecting data and how it will be used, at least to the school administration and, if appropriate, to parents and the student[cite: 349].</p>
             </div>
             <div class="best-practice-item">
                 <h4>Focus on Positive Behaviors Too</h4>
-                <p>Remember to track improvements and desired behaviors (like instances of following rules or on-task behavior) in addition to problems. This strengths-based approach can encourage teachers and students by highlighting growth. Many behavior plans include goal tracking (e.g. number of consecutive days meeting a behavior goal).</p>
+                <p>Remember to track improvements and desired behaviors (like instances of following rules or on-task behavior) in addition to problems[cite: 558]. This strengths-based approach can encourage teachers and students by highlighting growth[cite: 559]. Many behavior plans include goal tracking (e.g. number of consecutive days meeting a behavior goal)[cite: 560].</p>
             </div>
             <div class="best-practice-item">
                 <h4>Use Data to Inform Action</h4>
-                <p>Regularly review collected data to make decisions about interventions, supports, and strategies. Data is a tool for positive change and should guide teaching and reinforcement strategies, not just document failure. If data show success, communicate and celebrate it to reinforce the behavior. The collected data should directly inform your next steps in supporting the student.</p>
+                <p>Regularly review collected data to make decisions about interventions, supports, and strategies[cite: 218]. Data is a tool for positive change and should guide teaching and reinforcement strategies, not just document failure[cite: 561]. If data show success, communicate and celebrate it to reinforce the behavior[cite: 562]. The collected data should directly inform your next steps in supporting the student[cite: 186, 47].</p>
             </div>
         </section>
     </main>
@@ -678,6 +725,43 @@
                     });
                      // Set initial state based on checkbox if it's already checked on load
                     intensityScaleDiv.style.display = intensityCheckbox.checked ? 'block' : 'none';
+                }
+            <\/script>
+        `,
+        intervalSheetPDF: () => `
+            <p>This will generate a weekly interval recording sheet optimized for printing as a PDF. It includes location and optional intensity ratings.</p>
+            <label for="intervalBehaviorsListPDF">Behaviors to Track (comma-separated initials, e.g., ES, AS, A, VO, PD, R, NB):</label>
+            <input type="text" id="intervalBehaviorsListPDF" name="intervalBehaviorsListPDF" placeholder="e.g., ES, AS, A, VO, PD, R, NB" required>
+            
+            <label for="intervalOperationalDefPDF">Operational Definitions (Define EACH behavior initial listed above. Be specific!):</label>
+            <textarea id="intervalOperationalDefPDF" name="intervalOperationalDefPDF" rows="6" placeholder="Example:\nES: Elopement/Escape - Student leaves designated area without permission.\nAS: Attention-Seeking - Student makes noises or calls out to gain adult/peer attention.\nA: Aggression - Student hits, kicks, or bites others.\nVO: Verbal Outburst - Student yells, screams, or uses profanity.\nPD: Property Destruction - Student tears papers, breaks objects, or writes on property.\nR: Refusal/Non-Compliance - Student states 'no' or ignores instruction for >10 seconds.\nNB: Negative Body Language - Student frowns, rolls eyes, or slumps in seat when presented with a task."></textarea>
+
+            <label for="intervalTypePDF">Interval Type (How to score if behavior occurs - typically Partial Interval for this type of sheet):</label>
+            <select id="intervalTypePDF" name="intervalTypePDF">
+                <option value="partial">Partial Interval (occurs at any time during interval)</option>
+                <option value="whole">Whole Interval (occurs for the entire interval)</option>
+                <option value="momentary">Momentary Time Sampling (occurs at the moment interval ends)</option>
+            </select>
+            <p style="font-size: 0.8em; color: var(--text-soft-color);">Note: For this comprehensive weekly sheet, Partial Interval is often recommended for tracking any occurrence of a target behavior.</p>
+
+            <div>
+                <input type="checkbox" id="includeIntensityPDF" name="includeIntensityPDF">
+                <label for="includeIntensityPDF" class="checkbox-label">Include Intensity Rating Column (1-5 scale)</label>
+            </div>
+            <div id="intensityScaleOptionPDF" style="display:none;">
+                <label for="intensityScalePDF">Intensity Scale Definition (e.g., 1=Low, 5=High):</label>
+                <input type="text" id="intensityScalePDF" name="intensityScalePDF" placeholder="e.g., 1 (Low) to 5 (High Impact)">
+            </div>
+            <script>
+                // Show/hide intensity scale input based on checkbox
+                const intensityCheckboxPDF = document.getElementById('includeIntensityPDF');
+                const intensityScaleDivPDF = document.getElementById('intensityScaleOptionPDF');
+                if (intensityCheckboxPDF && intensityScaleDivPDF) {
+                    intensityCheckboxPDF.addEventListener('change', function() {
+                        intensityScaleDivPDF.style.display = this.checked ? 'block' : 'none';
+                    });
+                     // Set initial state based on checkbox if it's already checked on load
+                    intensityScaleDivPDF.style.display = intensityCheckboxPDF.checked ? 'block' : 'none';
                 }
             <\/script>
         `,
@@ -823,14 +907,14 @@
             if (generatorFieldConfigurations[type]) {
                 generatorOptionsContainer.innerHTML = generatorFieldConfigurations[type]();
                 // Re-attach event listener for intensity checkbox if intervalSheet is selected
-                if (type === 'intervalSheet') {
-                    const intensityCheckbox = document.getElementById('includeIntensity');
-                    const intensityScaleDiv = document.getElementById('intensityScaleOption');
+                if (type === 'intervalSheet' || type === 'intervalSheetPDF') {
+                    const intensityCheckbox = document.getElementById('includeIntensity' + (type === 'intervalSheetPDF' ? 'PDF' : ''));
+                    const intensityScaleDiv = document.getElementById('intensityScaleOption' + (type === 'intervalSheetPDF' ? 'PDF' : ''));
                     if (intensityCheckbox && intensityScaleDiv) {
                         intensityCheckbox.addEventListener('change', function() {
                             intensityScaleDiv.style.display = this.checked ? 'block' : 'none';
                         });
-                        // Ensure it's correctly displayed on subsequent selections if already checked
+                         // Set initial state based on checkbox if it's already checked on load
                         intensityScaleDiv.style.display = intensityCheckbox.checked ? 'block' : 'none';
                     }
                 }
@@ -853,28 +937,35 @@
                 }
 
                 const type = templateTypeSelect.value;
-                let output = `Data Collection Template: ${type.replace(/([A-Z])/g, ' $1').replace('Log', ' Log').replace('Sheet', ' Sheet').replace('Chart', ' Chart').trim()}\n\n`;
-                output += `Student: _________________________ Date: ______________ Observer: ______________\n`;
-                output += `Setting/Activity: _________________________ Time Start: _________ Time End: __________\n\n`;
+                let output = ''; // Will be plain text or HTML depending on type
+                let outputToPreTag = true; // By default, show in pre tag for plain text
+
+                let studentInfo = `Student: _________________________ Date: ______________ Observer: ______________\n`;
+                studentInfo += `Setting/Activity: _________________________ Time Start: _________ Time End: __________\n\n`;
 
                 let operationalDefText = "";
-                const opDefInputId = type.startsWith('freq') ? 'freqOperationalDef' :
-                                     type.startsWith('dur') ? 'durOperationalDef' :
-                                     type.startsWith('interval') ? 'intervalOperationalDef' :
-                                     type.startsWith('lat') ? 'latOperationalDef' :
-                                     type.startsWith('abc') ? 'abcOperationalDef' : null;
+                let mainBehaviorName = "Target Behavior";
 
-                if (opDefInputId && document.getElementById(opDefInputId)) {
-                    operationalDefText = document.getElementById(opDefInputId).value.trim();
+                // Determine inputs based on type
+                const isPDFType = (type === 'intervalSheetPDF');
+                const suffix = isPDFType ? 'PDF' : '';
+
+                const opDefInputId = (type.startsWith('freq') ? 'freqOperationalDef' :
+                                     type.startsWith('dur') ? 'durOperationalDef' :
+                                     (type.startsWith('interval') || type.startsWith('intervalSheet')) ? 'intervalOperationalDef' :
+                                     type.startsWith('lat') ? 'latOperationalDef' :
+                                     type.startsWith('abc') ? 'abcOperationalDef' : null);
+
+                if (document.getElementById(opDefInputId + suffix)) {
+                    operationalDefText = document.getElementById(opDefInputId + suffix).value.trim();
                 }
 
-                let mainBehaviorName = "Target Behavior";
                 if (type === 'frequencyLog') {
                     mainBehaviorName = document.getElementById('freqBehaviors')?.value.trim() || "Not Specified";
                 } else if (type === 'durationLog') {
                     mainBehaviorName = document.getElementById('durBehavior')?.value.trim() || "Not Specified";
-                } else if (type === 'intervalSheet') {
-                    mainBehaviorName = document.getElementById('intervalBehaviorsList')?.value.trim() || "Not Specified";
+                } else if (type === 'intervalSheet' || type === 'intervalSheetPDF') {
+                    mainBehaviorName = document.getElementById('intervalBehaviorsList' + suffix)?.value.trim() || "Not Specified";
                 } else if (type === 'latencyLog') {
                     mainBehaviorName = document.getElementById('latBehavior')?.value.trim() || "Not Specified";
                 } else if (type === 'abcChart') {
@@ -882,15 +973,15 @@
                 }
 
                 if (type !== 'abcChart' || (type === 'abcChart' && mainBehaviorName && mainBehaviorName !== "")) {
-                    output += `Target Behavior(s): ${mainBehaviorName}\n`;
+                    studentInfo += `Target Behavior(s): ${mainBehaviorName}\n`;
                 }
 
                 if (operationalDefText) {
-                    output += `Operational Definition(s):\n${operationalDefText}\n\n`;
+                    studentInfo += `Operational Definition(s):\n${operationalDefText}\n\n`;
                 } else if (type !== 'abcChart') {
-                    output += `Operational Definition(s): [Remember to define each behavior in clear, observable, and measurable terms so any two observers would agree.]\n\n`;
+                    studentInfo += `Operational Definition(s): [Remember to define each behavior in clear, observable, and measurable terms so any two observers would agree.]\n\n`;
                 }
-                output += `________________________________________________________________________________\n\n`;
+                studentInfo += `________________________________________________________________________________\n\n`;
 
 
                 switch (type) {
@@ -900,6 +991,8 @@
                         const freqIncludeLocation = document.getElementById('freqIncludeLocation')?.checked;
                         const freqIncludeNotes = document.getElementById('freqIncludeNotes')?.checked;
 
+                        output += `Data Collection Template: Frequency Count Log\n\n`;
+                        output += studentInfo;
                         output += `Observation Period: ${obsPeriod}\n\n`;
                         let freqHeader = `| Date | Time Start | Time End | Behavior Tracked (${mainBehaviorName}) | Tallies `;
                         let freqDivider = `|------|------------|----------|--------------------------|---------`;
@@ -934,6 +1027,8 @@
                         const durIncludeLocation = document.getElementById('durIncludeLocation')?.checked;
                         const durIncludeNotes = document.getElementById('durIncludeNotes')?.checked;
 
+                        output += `Data Collection Template: Duration Log\n\n`;
+                        output += studentInfo;
                         output += `Method: Duration Recording (measures how long a behavior lasts)\n`;
                         output += `Total Observation Period: ${durObservationPeriod}\n\n`;
                         
@@ -969,6 +1064,8 @@
                         const abcTargetBehavior = document.getElementById('abcTargetBehavior')?.value.trim() || '';
                         const abcIncludeHypothesis = document.getElementById('abcIncludeHypothesis')?.checked;
 
+                        output += `Data Collection Template: ABC Chart\n\n`;
+                        output += studentInfo;
                         output += `Instructions: For each observed instance of the target behavior(s), describe what happened just before (Antecedent), the Behavior itself, and what happened right after (Consequence). The goal is to identify patterns and the 'function' or 'why' behind the behavior.\n\n`
                         output += `| Date/Time | Setting/Activity | Antecedent (What happened BEFORE?) | Behavior (What did student DO - be specific, observable) | Consequence (What happened AFTER? How did others react?) |\n`;
                         output += `|-----------|------------------|------------------------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------------|\n`;
@@ -979,7 +1076,7 @@
                         output += `\nSummary of Patterns/Insights:\n\n`;
                         break;
 
-                    case 'intervalSheet':
+                    case 'intervalSheet': // Plain Text Version
                         const behaviorNamesStr = document.getElementById('intervalBehaviorsList')?.value || '';
                         const intervalTypeVal = document.getElementById('intervalType')?.value || 'partial';
                         const includeIntensity = document.getElementById('includeIntensity')?.checked;
@@ -999,6 +1096,8 @@
                             '2:00-2:15 pm', '2:15-2:30 pm', '2:30-2:45 pm', '2:45-3:00 pm'
                         ];
                         
+                        output += `Data Collection Template: Interval Recording Sheet (Weekly - Plain Text)\n\n`;
+                        output += studentInfo;
                         output += `Method: ${intervalTypeVal.charAt(0).toUpperCase() + intervalTypeVal.slice(1)} Interval Recording (Time Sampling)\n`;
                         output += `Instructions: For each time interval, circle the behavior codes that occurred (according to the interval type) and mark the intensity of any problem behavior.\n\n`;
                         if (includeIntensity) {
@@ -1013,42 +1112,51 @@
                             output += `[Remember to define each behavior (e.g., ES, AS) in clear, observable, and measurable terms below.]\n\n`;
                         }
 
-                        // Calculate max widths for columns
+                        // Calculate max widths for columns for plain text alignment
                         const maxTimeIntervalLength = timeIntervals.reduce((max, interval) => Math.max(max, interval.length), 0);
                         const circledBehaviorsString = behaviorCodes.map(code => `(${code})`).join(' ');
-                        const maxCircledBehaviorsLength = Math.max(1, circledBehaviorsString.length); // Ensure at least 1 character for padding if no behaviors
+                        const maxCircledBehaviorsLength = Math.max(1, circledBehaviorsString.length); // Min 1 to ensure padding works if no behaviors
 
                         const locationColContent = "Location";
-                        const locationColWidth = locationColContent.length; // Fixed width for "Location"
+                        const locationColWidth = locationColContent.length;
                         
                         const intensityColContent = "1  2  3  4  5";
-                        const intensityColWidth = intensityColContent.length; // Fixed width for "1  2  3  4  5"
+                        const intensityColWidth = intensityColContent.length;
 
-                        // Calculate total width of one daily section (Location + Behaviors + Intensity)
+                        // Calculate total width of one daily section (Location + Behaviors + Optional Intensity)
                         // This determines the spacing for the daily headers (Mon, Tues, etc.)
-                        const singleDailyBlockWidth = locationColWidth + 3 + maxCircledBehaviorsLength + (includeIntensity ? (3 + intensityColWidth) : 0); // +3 for ' | ' separators
-
-
+                        // 3 for " | " separators
+                        const singleDailyBlockWidth = locationColWidth + 3 + maxCircledBehaviorsLength + (includeIntensity ? (3 + intensityColWidth) : 0); 
+                        
                         // Top header for intensity (AM/PM Intensity)
                         if (includeIntensity) {
                             let amPmIntensityHeader = `AM Intensity`;
                             let amPmIntensityHeaderLine2 = `PM Intensity`;
 
-                            // Calculate padding for the initial "AM/PM Intensity" string to align with the *first* intensity block of the *first* day
-                            // This means padding it over the Time column, the Location column, and the Behaviors column of the first day.
-                            const paddingBeforeFirstIntensityBlock = maxTimeIntervalLength + 3 + locationColWidth + 3 + maxCircledBehaviorsLength; // Spaces + Separators
-                            amPmIntensityHeader += ' '.repeat(paddingBeforeFirstIntensityBlock - amPmIntensityHeader.length + 1); // +1 for extra space before first intensity block
-                            amPmIntensityHeaderLine2 += ' '.repeat(paddingBeforeFirstIntensityBlock - amPmIntensityHeaderLine2.length + 1);
+                            // Pad the initial "AM/PM Intensity" string to align with the *first* intensity block of the *first* day
+                            const paddingBeforeFirstIntensityBlock = maxTimeIntervalLength + 3 + locationColWidth + 3 + maxCircledBehaviorsLength; 
+                            amPmIntensityHeader += ' '.repeat(paddingBeforeFirstIntensityBlock - amPmIntensityHeader.length); 
+                            amPmIntensityHeaderLine2 += ' '.repeat(paddingBeforeFirstIntensityBlock - amPmIntensityHeaderLine2.length);
 
                             // Add intensity cells for each day
-                            for(let i=0; i<daysOfWeek.length; i++) { // 5 days
-                                if (i > 0) { // Add padding for subsequent days
-                                    const interDayPadding = singleDailyBlockWidth - intensityColWidth - 1; // Width of Loc + Behaviors for one day - intensity_col_width - 1 for leading space
-                                    amPmIntensityHeader += ' '.repeat(interDayPadding);
-                                    amPmIntensityHeaderLine2 += ' '.repeat(interDayPadding);
+                            for(let i=0; i<daysOfWeek.length; i++) {
+                                // Add separator for subsequent days
+                                if (i > 0) {
+                                    amPmIntensityHeader += ' | ';
+                                    amPmIntensityHeaderLine2 += ' | ';
+                                } else { // For the first day, just add a space before the intensity block if no other separator
+                                    amPmIntensityHeader += ' ';
+                                    amPmIntensityHeaderLine2 += ' ';
                                 }
                                 amPmIntensityHeader += `${intensityColContent}`;
                                 amPmIntensityHeaderLine2 += `${intensityColContent}`;
+                                
+                                // Add padding for the rest of the daily block if it's wider than just intensity content
+                                const remainingBlockSpace = singleDailyBlockWidth - (locationColWidth + 3 + maxCircledBehaviorsLength + 3 + intensityColWidth);
+                                if (remainingBlockSpace > 0) {
+                                     amPmIntensityHeader += ' '.repeat(remainingBlockSpace);
+                                     amPmIntensityHeaderLine2 += ' '.repeat(remainingBlockSpace);
+                                }
                             }
                             output += `${amPmIntensityHeader.trimEnd()}\n`;
                             output += `${amPmIntensityHeaderLine2.trimEnd()}\n`;
@@ -1073,9 +1181,9 @@
                         timeIntervals.forEach(interval => {
                             let row = `| ${interval.padEnd(maxTimeIntervalLength)} `;
                             daysOfWeek.forEach(day => {
-                                row += `| ${' '.repeat(locationColWidth)} | ${' '.repeat(maxCircledBehaviorsLength)} `; // Empty space for Location and Behaviors to be filled
+                                row += `| ${' '.repeat(locationColWidth)} | ${circledBehaviorsString.padEnd(maxCircledBehaviorsLength)} `; // Circled behaviors/empty space
                                 if (includeIntensity) {
-                                    row += `| ${' '.repeat(intensityColWidth)} `; // Empty space for Intensity to be filled
+                                    row += `| ${' '.repeat(intensityColWidth)} `; // Empty space for Intensity
                                 }
                             });
                             output += row + '|\n';
@@ -1083,8 +1191,118 @@
 
                         output += `\nTotal # of Behaviors: ${'_________'.repeat(daysOfWeek.length).slice(0, -1)} \n`; 
                         output += `Percentage of behavior: ${'_________'.repeat(daysOfWeek.length).slice(0, -1)}\n`; 
-                        output += `\n\nNOTE: For best viewing of this table, copy and paste it into a plain text editor (like Notepad) or a document/spreadsheet program (like Google Docs or Excel) and ensure a monospace font (e.g., Courier New, Consolas, Monaco) is selected. This will maintain precise column alignment.`;
+                        output += `\n\nNOTE: For best viewing of this table, copy and paste it into a plain text editor (like Notepad) or a document/spreadsheet program (like Google Docs or Word) and select a monospace font (e.g., Courier New, Consolas, Monaco). This will maintain precise column alignment.`;
                         output += `\n\n`;
+                        break;
+
+                    case 'intervalSheetPDF': // HTML for Print/PDF Version
+                        outputToPreTag = false; // This output is HTML, not plain text for pre tag
+                        const behaviorNamesStrPDF = document.getElementById('intervalBehaviorsListPDF')?.value || '';
+                        const intervalTypeValPDF = document.getElementById('intervalTypePDF')?.value || 'partial';
+                        const includeIntensityPDF = document.getElementById('includeIntensityPDF')?.checked;
+                        const intensityScaleTextPDF = document.getElementById('intensityScalePDF')?.value || '1-5';
+
+                        const behaviorCodesPDF = behaviorNamesStrPDF.split(',').map(s => s.trim()).filter(s => s.length > 0);
+                        const daysOfWeekPDF = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri'];
+                        const timeIntervalsPDF = [
+                            '7:00-7:15 am', '7:15-7:30 am', '7:30-7:45 am', '7:45-8:00 am',
+                            '8:00-8:15 am', '8:15-8:30 am', '8:30-8:45 am', '8:45-9:00 am',
+                            '9:00-9:15 am', '9:15-9:30am', '9:30-9:45 am', '9:45-10:00 am',
+                            '10:00-10:15 am', '10:15-10:30 am', '10:30-10:45 am', '10:45-11:00 am',
+                            '11:00-11:15 am', '11:15-11:30 am', '11:30-11:45 am', '11:45-12:00 pm',
+                            '12:00-12:15 pm', '12:15-12:30 pm', '12:30-12:45 pm', '12:45-1:00 pm',
+                            '1:00-1:15 pm', '1:15-1:30 pm', '1:30-1:45 pm', '1:45-2:00 pm',
+                            '2:00-2:15 pm', '2:15-2:30 pm', '2:30-2:45 pm', '2:45-3:00 pm'
+                        ];
+                        
+                        let htmlContent = `
+                            <div id="printContent">
+                                <h1>Behavior Data Sheet</h1>
+                                <p><strong>Student:</strong> _________________________ <strong>Date:</strong> ______________ <strong>Observer:</strong> ______________</p>
+                                <p><strong>Setting/Activity:</strong> _________________________ <strong>Time Start:</strong> _________ <strong>Time End:</strong> __________</p>
+                                <p><strong>Method:</strong> ${intervalTypeValPDF.charAt(0).toUpperCase() + intervalTypeValPDF.slice(1)} Interval Recording (Time Sampling)</p>
+                                <p><strong>Instructions:</strong> For each time interval, circle the behavior codes that occurred (according to the interval type) and mark the intensity of any problem behavior.</p>
+                                ${includeIntensityPDF ? `<p><strong>Intensity Scale:</strong> ${intensityScaleTextPDF}</p>` : ''}
+                                
+                                <h2>Target Behaviors & Definitions:</h2>
+                                <p class="small-text">${document.getElementById('intervalOperationalDefPDF')?.value.trim() || '[Please define each behavior (e.g., ES, AS) in clear, observable, and measurable terms here.]'}</p>
+
+                                <table class="interval-sheet-table">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2">Time intervals</th>
+                                            ${daysOfWeekPDF.map(day => `<th colspan="${2 + (includeIntensityPDF ? 1 : 0)}" class="day-header">${day}</th>`).join('')}
+                                        </tr>
+                                        <tr>
+                                            ${daysOfWeekPDF.map(day => `
+                                                <th class="location-cell">Location</th>
+                                                <th class="behaviors-cell no-break">${behaviorCodesPDF.map(code => `<span style="border:1px solid #000; border-radius: 50%; padding: 0 2px;">${code}</span>`).join(' ')}</th>
+                                                ${includeIntensityPDF ? '<th class="intensity-cell">1 2 3 4 5</th>' : ''}
+                                            `).join('')}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${timeIntervalsPDF.map(interval => `
+                                            <tr>
+                                                <td class="no-break">${interval}</td>
+                                                ${daysOfWeekPDF.map(day => `
+                                                    <td class="location-cell"></td>
+                                                    <td class="behaviors-cell"></td>
+                                                    ${includeIntensityPDF ? '<td class="intensity-cell"></td>' : ''}
+                                                `).join('')}
+                                            </tr>
+                                        `).join('')}
+                                        <tr>
+                                            <td colspan="1"><strong>Total # of Behaviors:</strong></td>
+                                            ${daysOfWeekPDF.map(day => `<td colspan="${2 + (includeIntensityPDF ? 1 : 0)}">____________</td>`).join('')}
+                                        </tr>
+                                        <tr>
+                                            <td colspan="1"><strong>Percentage of behavior:</strong></td>
+                                            ${daysOfWeekPDF.map(day => `<td colspan="${2 + (includeIntensityPDF ? 1 : 0)}">____________</td>`).join('')}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p><strong>Additional Notes:</strong></p>
+                                <div style="height: 50px; border: 1px solid #ccc; margin-top: 10px;"></div>
+                            </div>
+                        `;
+                        output = htmlContent; // Set output to HTML string
+
+                        // Special handling for PDF-Ready sheets
+                        const printWindow = window.open('', '_blank');
+                        printWindow.document.write(`
+                            <html>
+                            <head>
+                                <title>Behavior Data Sheet - Print</title>
+                                <style>
+                                    @page { size: A4 landscape; margin: 1cm; } /* A4 landscape for wider table */
+                                    body { font-family: Arial, sans-serif; font-size: 10pt; margin: 0; padding: 0; }
+                                    h1, h2, h3, p { color: #000; margin-bottom: 0.5em; }
+                                    table { width: 100%; border-collapse: collapse; margin-bottom: 1em; table-layout: fixed; } /* Fixed table layout */
+                                    th, td { border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle; }
+                                    th { background-color: #f2f2f2; font-weight: bold; }
+                                    .small-text { font-size: 8pt; }
+                                    .no-break { white-space: nowrap; }
+                                    .day-header { font-size: 10pt; }
+                                    .location-cell { width: 45px; } /* Adjusted width */
+                                    .behaviors-cell { width: 110px; } /* Adjusted width for circled behaviors */
+                                    .intensity-cell { width: 55px; } /* Adjusted width */
+                                    .time-interval-cell { width: 70px; } /* Fixed width for time column */
+                                    .circle { border: 1px solid #000; border-radius: 50%; padding: 0 2px; display: inline-block; min-width: 1.2em;} /* Circle effect */
+                                </style>
+                            </head>
+                            <body>
+                                ${htmlContent}
+                            </body>
+                            </html>
+                        `);
+                        printWindow.document.close();
+                        printWindow.focus();
+                        printWindow.print();
+                        printWindow.onafterprint = () => printWindow.close();
+
+                        // Hide the generated text output container on the main page for PDF type
+                        generatedTemplateOutputContainer.style.display = 'none';
                         break;
 
                     case 'latencyLog':
@@ -1093,6 +1311,8 @@
                         const latAntecedent = document.getElementById('latAntecedent')?.value || 'Instruction given';
                         const latIncludeNotes = document.getElementById('latIncludeNotes')?.checked;
 
+                        output += `Data Collection Template: Latency Log\n\n`;
+                        output += studentInfo;
                         output += `Method: Latency Recording (measures time from prompt to behavior onset)\n`;
                         output += `Antecedent/Prompt: ${latAntecedent}\n\n`;
                         
@@ -1116,8 +1336,15 @@
                         output += `\nAdditional Notes:\n\n`;
                         break;
                 }
-                generatedTemplateOutput.textContent = output;
-                generatedTemplateOutputContainer.style.display = 'block';
+
+                if (outputToPreTag) {
+                    generatedTemplateOutput.textContent = output;
+                    generatedTemplateOutputContainer.style.display = 'block';
+                } else {
+                    // For PDF generation, we don't display in the <pre> tag.
+                    generatedTemplateOutput.textContent = ''; // Clear it just in case
+                    generatedTemplateOutputContainer.style.display = 'none';
+                }
             });
         }
 
@@ -1273,32 +1500,32 @@
                 // Primary recommendations based on 'infoNeeded' and 'behaviorNature'
                 if (infoNeeded === 'whenAndWhy') {
                     recommendations.add("ABC Recording");
-                    reasoningPoints.push("ABC Recording is crucial for understanding the context, triggers (Antecedents), and outcomes (Consequences) that maintain a behavior. This is vital for functional behavioral assessments.");
+                    reasoningPoints.push("ABC Recording is crucial for understanding the context, triggers (Antecedents), and outcomes (Consequences) that maintain a behavior. This is vital for functional behavioral assessments[cite: 32, 4].");
                 }
                 if (infoNeeded === 'speedOfResponse') {
                     recommendations.add("Latency Recording");
-                    reasoningPoints.push("Latency Recording directly measures the time delay between a prompt/instruction and the onset of the behavior, ideal for assessing compliance or task initiation.");
+                    reasoningPoints.push("Latency Recording directly measures the time delay between a prompt/instruction and the onset of the behavior, ideal for assessing compliance or task initiation[cite: 516].");
                 }
                 if (infoNeeded === 'howOften' && behaviorNature === 'discrete') {
                     recommendations.add("Frequency (Event) Recording");
-                    reasoningPoints.push("For discrete behaviors with a clear start and end, Frequency Recording provides an exact count of occurrences, ideal for tracking increases or decreases.");
+                    reasoningPoints.push("For discrete behaviors with a clear start and end, Frequency Recording provides an exact count of occurrences, ideal for tracking increases or decreases[cite: 63, 24].");
                 }
                 if (infoNeeded === 'howLong' || infoNeeded === 'proportionOfTime') {
                     if (behaviorNature === 'continuous' || (behaviorNature === 'discrete' && infoNeeded === 'howLong')) {
                         recommendations.add("Duration Recording");
-                        reasoningPoints.push("Duration Recording is best when the length of time a behavior occurs is the primary concern, such as tantrums or on-task behavior.");
+                        reasoningPoints.push("Duration Recording is best when the length of time a behavior occurs is the primary concern, such as tantrums or on-task behavior[cite: 89, 97].");
                     }
                 }
                 if (infoNeeded === 'proportionOfTime' || behaviorNature === 'continuous') {
                     if (observerAvailability === 'intermittentMultitasking') {
                         recommendations.add("Momentary Time Sampling");
-                        reasoningPoints.push("Momentary Time Sampling is practical for ongoing behaviors when the observer is multitasking, requiring checks only at specific moments.");
+                        reasoningPoints.push("Momentary Time Sampling is practical for ongoing behaviors when the observer is multitasking, requiring checks only at specific moments[cite: 146, 40, 44].");
                     } else {
                         recommendations.add("Interval Recording (Partial or Whole)");
-                        reasoningPoints.push("For high-frequency or continuous behaviors, Interval Recording (Partial or Whole) provides an estimate of behavior occurrence, managing observer workload.");
+                        reasoningPoints.push("For high-frequency or continuous behaviors, Interval Recording (Partial or Whole) provides an estimate of behavior occurrence, managing observer workload[cite: 141, 165].");
                         // Add specific type recommendation based on the goal
                         if (behaviorNature === 'continuous' && infoNeeded === 'proportionOfTime') {
-                            reasoningPoints.push("Use Whole-Interval for sustained behaviors to increase (e.g., on-task) or Partial-Interval for any occurrence of behavior to decrease (e.g., self-stimulatory).");
+                            reasoningPoints.push("Use Whole-Interval for sustained behaviors to increase (e.g., on-task) [cite: 145, 42] or Partial-Interval for any occurrence of behavior to decrease (e.g., self-stimulatory)[cite: 144, 41].");
                         }
                     }
                 }
@@ -1306,37 +1533,37 @@
                 // Secondary/Refinement based on other factors
                 if (behaviorSeverity === 'severeHighImpact' && !recommendations.has("ABC Recording")) {
                     recommendations.add("ABC Recording");
-                    reasoningPoints.push("For severe behaviors, ABC Recording is highly recommended to understand the function and inform effective, function-based interventions.");
+                    reasoningPoints.push("For severe behaviors, ABC Recording is highly recommended to understand the function and inform effective, function-based interventions[cite: 41, 44, 57].");
                 }
                 if (needBaseline === 'yes' && recommendations.size === 0) {
                     recommendations.add("Frequency (Event) Recording");
-                    reasoningPoints.push("Frequency Recording is a straightforward way to establish a baseline for discrete behaviors.");
+                    reasoningPoints.push("Frequency Recording is a straightforward way to establish a baseline for discrete behaviors[cite: 27, 28, 70].");
                 }
                 if (needBaseline === 'yes' && behaviorNature === 'complex' && !recommendations.has("ABC Recording")) {
                      recommendations.add("ABC Recording");
-                     reasoningPoints.push("For complex behaviors or when the 'why' is unknown, ABC Recording helps uncover patterns and hypothesize function, which is critical for baseline understanding.");
+                     reasoningPoints.push("For complex behaviors or when the 'why' is unknown, ABC Recording helps uncover patterns and hypothesize function, which is critical for baseline understanding[cite: 57, 58].");
                 }
                 if (behaviorNature === 'complex' && recommendations.size === 0) {
                     recommendations.add("Narrative Observation (Anecdotal Records)");
-                    reasoningPoints.push("For complex behaviors or when initial understanding is needed, narrative observations provide rich qualitative detail and context, helping to identify what to quantify later.");
+                    reasoningPoints.push("For complex behaviors or when initial understanding is needed, narrative observations provide rich qualitative detail and context, helping to identify what to quantify later[cite: 13, 16, 180, 181].");
                 }
 
                 // Combination recommendations
                 if (recommendations.has("ABC Recording") && (recommendations.has("Frequency (Event) Recording") || recommendations.has("Duration Recording") || recommendations.has("Interval Recording (Partial or Whole)") || recommendations.has("Momentary Time Sampling"))) {
-                    reasoningPoints.push("Often, combining ABC data with quantitative measures (like Frequency, Duration, or Interval Recording) provides both contextual understanding and measurable change over time.");
+                    reasoningPoints.push("Often, combining ABC data with quantitative measures (like Frequency, Duration, or Interval Recording) provides both contextual understanding and measurable change over time[cite: 182, 58].");
                 }
                 if (recommendations.has("Frequency (Event) Recording") && recommendations.has("Duration Recording") && recommendations.size <= 2) {
-                    reasoningPoints.push("For discrete behaviors, combining Frequency and Duration provides a comprehensive picture of how often it occurs and how long each instance lasts.");
+                    reasoningPoints.push("For discrete behaviors, combining Frequency and Duration provides a comprehensive picture of how often it occurs and how long each instance lasts[cite: 118, 5].");
                 }
                 if (observerAvailability === 'afterEvent' && !recommendations.has("Permanent Product Recording")) {
                     recommendations.add("Permanent Product Recording");
-                    reasoningPoints.push("When direct observation is not feasible, Permanent Product recording (e.g., examining completed assignments, damaged items) can be used, often as a supplement.");
+                    reasoningPoints.push("When direct observation is not feasible, Permanent Product recording (e.g., examining completed assignments, damaged items) can be used, often as a supplement[cite: 531, 532].");
                 }
 
 
                 if (recommendations.size === 0) {
                     recommendations.add("Narrative Observation (Anecdotal Records)");
-                    reasoningPoints.push("If the behavior is complex or the best measurement isn't immediately clear, start with detailed narrative (anecdotal) notes during direct observation. This can help clarify the behavior's characteristics and guide the selection of a more specific data collection method later.");
+                    reasoningPoints.push("If the behavior is complex or the best measurement isn't immediately clear, start with detailed narrative (anecdotal) notes during direct observation. This can help clarify the behavior's characteristics and guide the selection of a more specific data collection method later[cite: 13, 16, 180, 181].");
                 }
 
                 recMethodP.textContent = recommendations.size > 0 ? Array.from(recommendations).join('; or ') : "Could not determine a primary recommendation. Consider starting with Narrative Observation.";
