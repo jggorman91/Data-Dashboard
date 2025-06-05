@@ -645,12 +645,12 @@
             </div>
         `,
         intervalSheet: () => `
-            <p>This template is designed for weekly tracking of multiple behaviors in fixed 15-minute intervals, including intensity ratings and location, similar to the provided example.</p>
-            <label for="intervalBehaviorsList">Behaviors to Track (comma-separated, e.g., ES, AS, A, VO, PD, R, NB):</label>
+            <p>This template is designed for weekly tracking of multiple behaviors in fixed 15-minute intervals, including location and optional intensity ratings, similar to the example.</p>
+            <label for="intervalBehaviorsList">Behaviors to Track (comma-separated initials, e.g., ES, AS, A, VO, PD, R, NB):</label>
             <input type="text" id="intervalBehaviorsList" name="intervalBehaviorsList" placeholder="e.g., ES, AS, A, VO, PD, R, NB" required>
             
-            <label for="intervalOperationalDef">Operational Definitions (Define EACH behavior listed above. Be specific!):</label>
-            <textarea id="intervalOperationalDef" name="intervalOperationalDef" rows="6" placeholder="Example:\nES (Elopement/Escape): Student leaves designated area without permission.\nAS (Attention-Seeking): Student makes noises or calls out to gain adult/peer attention.\nA (Aggression): Student hits, kicks, or bites others.\nVO (Verbal Outburst): Student yells, screams, or uses profanity.\nPD (Property Destruction): Student tears papers, breaks objects, or writes on property.\nR (Refusal/Non-Compliance): Student states 'no' or ignores instruction for >10 seconds.\nNB (Negative Body Language): Student frowns, rolls eyes, or slumps in seat when presented with a task."></textarea>
+            <label for="intervalOperationalDef">Operational Definitions (Define EACH behavior initial listed above. Be specific!):</label>
+            <textarea id="intervalOperationalDef" name="intervalOperationalDef" rows="6" placeholder="Example:\nES: Elopement/Escape - Student leaves designated area without permission.\nAS: Attention-Seeking - Student makes noises or calls out to gain adult/peer attention.\nA: Aggression - Student hits, kicks, or bites others.\nVO: Verbal Outburst - Student yells, screams, or uses profanity.\nPD: Property Destruction - Student tears papers, breaks objects, or writes on property.\nR: Refusal/Non-Compliance - Student states 'no' or ignores instruction for >10 seconds.\nNB: Negative Body Language - Student frowns, rolls eyes, or slumps in seat when presented with a task."></textarea>
 
             <label for="intervalType">Interval Type (How to score if behavior occurs - typically Partial Interval for this type of sheet):</label>
             <select id="intervalType" name="intervalType">
@@ -660,8 +660,26 @@
             </select>
             <p style="font-size: 0.8em; color: var(--text-soft-color);">Note: For this comprehensive weekly sheet, Partial Interval is often recommended for tracking any occurrence of a target behavior.</p>
 
-            <label for="intensityScale">Intensity Scale Definition (e.g., 1=Low, 5=High):</label>
-            <input type="text" id="intensityScale" name="intensityScale" placeholder="e.g., 1 (Low) to 5 (High Impact)">
+            <div>
+                <input type="checkbox" id="includeIntensity" name="includeIntensity">
+                <label for="includeIntensity" class="checkbox-label">Include Intensity Rating Column (1-5 scale)</label>
+            </div>
+            <div id="intensityScaleOption" style="display:none;">
+                <label for="intensityScale">Intensity Scale Definition (e.g., 1=Low, 5=High):</label>
+                <input type="text" id="intensityScale" name="intensityScale" placeholder="e.g., 1 (Low) to 5 (High Impact)">
+            </div>
+            <script>
+                // Show/hide intensity scale input based on checkbox
+                const intensityCheckbox = document.getElementById('includeIntensity');
+                const intensityScaleDiv = document.getElementById('intensityScaleOption');
+                if (intensityCheckbox && intensityScaleDiv) {
+                    intensityCheckbox.addEventListener('change', function() {
+                        intensityScaleDiv.style.display = this.checked ? 'block' : 'none';
+                    });
+                     // Set initial state based on checkbox if it's already checked on load
+                    intensityScaleDiv.style.display = intensityCheckbox.checked ? 'block' : 'none';
+                }
+            <\/script>
         `,
         latencyLog: () => `
             <label for="latBehavior">Behavior for Latency Recording:</label>
@@ -806,10 +824,15 @@
                 generatorOptionsContainer.innerHTML = generatorFieldConfigurations[type]();
                 // Re-attach event listener for intensity checkbox if intervalSheet is selected
                 if (type === 'intervalSheet') {
-                    const intensityCheckbox = document.getElementById('includeIntensity'); // This will no longer exist in intervalSheet config
-                    const intensityScaleDiv = document.getElementById('intensityScaleOption'); // This will no longer exist in intervalSheet config
-                    // The old logic for showing/hiding intensity options based on checkbox is removed,
-                    // as intensity is now always included and configured by text input for intervalSheet
+                    const intensityCheckbox = document.getElementById('includeIntensity');
+                    const intensityScaleDiv = document.getElementById('intensityScaleOption');
+                    if (intensityCheckbox && intensityScaleDiv) {
+                        intensityCheckbox.addEventListener('change', function() {
+                            intensityScaleDiv.style.display = this.checked ? 'block' : 'none';
+                        });
+                        // Ensure it's correctly displayed on subsequent selections if already checked
+                        intensityScaleDiv.style.display = intensityCheckbox.checked ? 'block' : 'none';
+                    }
                 }
             } else {
                 generatorOptionsContainer.innerHTML = '<p>Select a template type to see options.</p>';
@@ -959,7 +982,9 @@
                     case 'intervalSheet':
                         const behaviorNamesStr = document.getElementById('intervalBehaviorsList')?.value || '';
                         const intervalTypeVal = document.getElementById('intervalType')?.value || 'partial';
-                        const intensityScaleText = document.getElementById('intensityScale')?.value || '1 (Low) to 5 (High)';
+                        const includeIntensity = document.getElementById('includeIntensity')?.checked;
+                        const intensityScaleText = document.getElementById('intensityScale')?.value || '1-5';
+
 
                         const behaviorCodes = behaviorNamesStr.split(',').map(s => s.trim()).filter(s => s.length > 0);
                         const daysOfWeek = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri'];
@@ -975,8 +1000,10 @@
                         ];
                         
                         output += `Method: ${intervalTypeVal.charAt(0).toUpperCase() + intervalTypeVal.slice(1)} Interval Recording (Time Sampling)\n`;
-                        output += `Instructions: For each time interval, mark the behavior codes that occurred (according to the interval type) and rate the intensity of any problem behavior.\n\n`;
-                        output += `Intensity Scale: ${intensityScaleText}\n\n`;
+                        output += `Instructions: For each time interval, circle the behavior codes that occurred (according to the interval type) and mark the intensity of any problem behavior.\n\n`;
+                        if (includeIntensity) {
+                            output += `Intensity Scale: ${intensityScaleText}\n\n`;
+                        }
                         
                         output += `Target Behaviors & Codes:\n`;
                         const behaviorOpDef = document.getElementById('intervalOperationalDef')?.value.trim();
@@ -987,20 +1014,33 @@
                         }
 
                         // Top header for intensity
-                        output += `AM Intensity ${'  1  2  3  4  5    '.repeat(5)}\n`;
-                        output += `PM Intensity${'   1  2  3  4  5    '.repeat(5)}\n`; // Adjusted padding
+                        if (includeIntensity) {
+                            const intensityCell = '1  2  3  4  5';
+                            let amPmIntensityHeader = `AM Intensity `;
+                            let amPmIntensityHeaderLine2 = `PM Intensity `;
+                            for(let i=0; i<5; i++) { // 5 days
+                                amPmIntensityHeader += `${intensityCell}    `;
+                                amPmIntensityHeaderLine2 += `${intensityCell}    `;
+                            }
+                            output += `${amPmIntensityHeader}\n`;
+                            output += `${amPmIntensityHeaderLine2}\n`;
+                        }
+
 
                         // Main table header
                         let headerRow1 = '| Time intervals ';
                         let headerRow2 = '|----------------';
                         
-                        const behaviorCodeHeaderPart = behaviorCodes.map(code => code.padEnd(2)).join('  ');
-                        const behaviorCodeDividerPart = behaviorCodes.map(() => '-').join('   '); // Underscores for checkboxes
+                        // Calculate padding for behavior codes (e.g., (ES) (AS) )
+                        const circledBehaviorsLength = behaviorCodes.map(code => `(${code})`).join(' ').length;
+                        const minBehaviorColumnWidth = Math.max(10, circledBehaviorsLength); // Ensure minimum width
 
                         daysOfWeek.forEach(day => {
-                            const columnWidth = behaviorCodeHeaderPart.length + '  1  2  3  4  5'.length + 'Location'.length + 5; // Approx width for all columns
-                            headerRow1 += `| ${day.padEnd(columnWidth)} `; 
-                            headerRow2 += `| Location | ${behaviorCodeHeaderPart} | 1  2  3  4  5 `;
+                            headerRow1 += `| ${day.padEnd(minBehaviorColumnWidth + (' Location '.length) + (includeIntensity ? ' 1  2  3  4  5 '.length : 0) + 2)} `; // +2 for extra padding/borders
+                            headerRow2 += `| Location | ${behaviorCodes.map(code => `(${code})`).join(' ').padEnd(minBehaviorColumnWidth)} `; // Circled behaviors
+                            if (includeIntensity) {
+                                headerRow2 += `| 1  2  3  4  5 `;
+                            }
                         });
                         output += headerRow1 + '|\n';
                         output += headerRow2 + '|\n';
@@ -1008,13 +1048,16 @@
                         timeIntervals.forEach(interval => {
                             let row = `| ${interval.padEnd(14)} `;
                             daysOfWeek.forEach(day => {
-                                row += `|          | ${behaviorCodes.map(code => ' ').join('  ')} | 1  2  3  4  5 `;
+                                row += `|          | ${behaviorCodes.map(code => `(${code})`).join(' ').padEnd(minBehaviorColumnWidth)} `;
+                                if (includeIntensity) {
+                                    row += `| 1  2  3  4  5 `;
+                                }
                             });
                             output += row + '|\n';
                         });
 
-                        output += `\nTotal # of Behaviors: ${'_________'.repeat(daysOfWeek.length).slice(0, -1)} \n`; // Shorter repeat
-                        output += `Percentage of behavior: ${'_________'.repeat(daysOfWeek.length).slice(0, -1)}\n`; // Shorter repeat
+                        output += `\nTotal # of Behaviors: ${'_________'.repeat(daysOfWeek.length).slice(0, -1)} \n`; 
+                        output += `Percentage of behavior: ${'_________'.repeat(daysOfWeek.length).slice(0, -1)}\n`; 
                         output += `\nAdditional Notes:\n\n`;
                         break;
 
